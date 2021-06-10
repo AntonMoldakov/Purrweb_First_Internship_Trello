@@ -1,0 +1,32 @@
+
+.columns {
+    display: flex;
+    border: 1px solid coral;
+}
+
+.columns__item {
+    width: 300px;
+    border: 1px solid burlywood;
+    text-align: center;
+}
+
+.column__title {
+    padding: .5rem;
+    background-color: darkgray;
+}
+
+.ColumnTitle {
+    padding: 3px;
+    color: white;
+    background-color: #47474A;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+}
+
+.ColumnTitle:active, .ColumnTitle:focus {
+    outline: none;
+}
+.ColumnTitle::-moz-focus-inner {
+    border: 0;
+}

@@ -1,0 +1,11 @@
+.card {
+    width: 90%;
+    padding: .5rem 1rem;
+    margin-bottom: .5rem;
+    color: white;
+    background-color: dimgray;
+}
+
+.card__title {
+    margin-bottom: .5rem;
+}
