@@ -1,5 +1,6 @@
 import React from 'react'
 import Columns from "./components/Columns/Columns";
+import Auth from "./components/Auth/Auth";
 
 function App() {
     const [userName, setUserName] = React.useState('Guest')
@@ -54,6 +55,7 @@ function App() {
 
     return (
         <div className='wrapper'>
+            <Auth userNameChange={userNameChange}/>
             <h1>TrelloCopy</h1>
             <Columns cards={cards} columns={columns}
                      addColumn={addColumn} editColumnTitle={editColumnTitle}

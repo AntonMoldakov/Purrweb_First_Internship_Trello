@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './AddCard.css'
+import '../../../modal.css'
 import {Form, Field} from 'react-final-form'
 
 function AddCard({addCard, columnId}) {
