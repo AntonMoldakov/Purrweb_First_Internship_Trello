@@ -36,6 +36,16 @@ function App() {
         }]))
     }
 
+    function changeCard(id, cardTitle, cardContent) {
+        setCards(cards.map(card => {
+            if(card.id === id) {
+                card.cardTitle = cardTitle
+                card.cardContent = cardContent
+            }
+            return card
+        }))
+    }
+
     function deleteCard(id) {
         setCards(cards.filter(card => card.id !== id))
     }
@@ -59,7 +69,7 @@ function App() {
             <h1>TrelloCopy</h1>
             <Columns cards={cards} columns={columns}
                      addColumn={addColumn} editColumnTitle={editColumnTitle}
-                     addCard={addCard} deleteCard={deleteCard}/>
+                     addCard={addCard} deleteCard={deleteCard} changeCard={changeCard}/>
 
         </div>
     )

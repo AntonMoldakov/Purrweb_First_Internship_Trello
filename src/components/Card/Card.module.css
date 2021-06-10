@@ -5,6 +5,7 @@
     border: 1px solid darkgray;
     border-radius: 5px;
     color: #E2E2E2;
+    cursor: pointer;
 }
 
 .header {
