@@ -1,15 +1,13 @@
-import React, {useEffect} from 'react'
-import Context from "./Context"
-import Loader from "./Loader";
+import React from 'react'
 import Columns from "./components/Columns/Columns";
 
 function App() {
     const [userName, setUserName] = React.useState('Guest')
     const [cards, setCards] = React.useState([
-        {columnId: 1, cardTitle: 'Card 1', cardContent: 'fdsfsd fsd fsd fsd fsd fsdff', author: 'Anton'},
-        {columnId: 1, cardTitle: 'Card 1', cardContent: 'fdsfsd fsfsd fsdff', author: 'Anton'},
-        {columnId: 2, cardTitle: 'Card 2', cardContent: 'fdsfsd fsd dasdfsd fsd fsd fsdff', author: 'Gleb'},
-        {columnId: 3, cardTitle: 'Card 3', cardContent: 'fdsffsd fsd fsd fsdff', author: 'Arthur'}
+        {id: 1, columnId: 1, cardTitle: 'Card 1', cardContent: 'fdsfsd fsd fsd fsd fsd fsdff', author: 'Anton'},
+        {id: 2, columnId: 1, cardTitle: 'Card 1', cardContent: 'fdsfsd fsfsd fsdff', author: 'Anton'},
+        {id: 3, columnId: 2, cardTitle: 'Card 2', cardContent: 'fdsfsd fsd dasdfsd fsd fsd fsdff', author: 'Gleb'},
+        {id: 4, columnId: 3, cardTitle: 'Card 3', cardContent: 'fdsffsd fsd fsd fsdff', author: 'Arthur'}
     ])
     const [columns, setColumns] = React.useState([
         {id: 1, columnTitle: 'TODO'},
@@ -27,13 +25,18 @@ function App() {
         }]))
     }
 
-    function addCard({columnId, cardTitle, cardContent}) {
+    function addCard(columnId, cardTitle, cardContent) {
         setCards(cards.concat([{
-            columnId: cards.length + 1,
+            id: new Date(),
+            columnId,
             cardTitle,
             cardContent,
             author: userName
         }]))
+    }
+
+    function deleteCard(id) {
+        setCards(cards.filter(card => card.id !== id))
     }
 
     function editColumnTitle(id, title) {
@@ -50,10 +53,12 @@ function App() {
     }
 
     return (
-
         <div className='wrapper'>
             <h1>TrelloCopy</h1>
-            {cards.length ? <Columns cards={cards} columns={columns} addColumn={addColumn} editColumnTitle={editColumnTitle}/> : <Loader/>}
+            <Columns cards={cards} columns={columns}
+                     addColumn={addColumn} editColumnTitle={editColumnTitle}
+                     addCard={addCard} deleteCard={deleteCard}/>
+
         </div>
     )
 }

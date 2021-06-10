@@ -4,15 +4,15 @@ import Card from "../../Card/Card";
 import ColumnTitle from "./ColumnTitle";
 import AddCard from "../../Card/AddCard/AddCard";
 
-function Column({cards, editColumnTitle, id, columnTitle}) {
+function Column({cards, editColumnTitle, addCard, deleteCard, id, columnTitle}) {
     return (
         <div className={styles.columns__item}>
             <ColumnTitle className={styles.column__title} editColumnTitle={editColumnTitle} columnTitle={columnTitle} id={id}/>
             {
-                cards.map(card => <Card {...card}/>)
+                cards.map(card => <Card key={card.id} deleteCard={deleteCard} {...card}/>)
             }
             <div>
-                <AddCard/>
+                <AddCard addCard={addCard} columnId={id}/>
             </div>
         </div>
     )

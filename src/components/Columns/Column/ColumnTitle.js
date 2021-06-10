@@ -6,9 +6,9 @@ function ColumnTitle({editColumnTitle, columnTitle, id}) {
     let [editMode, setEditMode] = useState(false);
     let [title, setTitle] = useState(columnTitle);
 
-    useEffect(() => {
-        setTitle(columnTitle);
-    }, [columnTitle]);
+    // useEffect(() => {
+    //     setTitle(columnTitle);
+    // }, [columnTitle]);
 
     const activateEditMode = () => {
         setEditMode(true);
@@ -26,7 +26,7 @@ function ColumnTitle({editColumnTitle, columnTitle, id}) {
     return (
         <div>
             {!editMode &&
-            <div>
+            <div className={styles.column__title}>
                 <span onDoubleClick={activateEditMode} >{columnTitle || "Column title"}</span>
             </div>
             }

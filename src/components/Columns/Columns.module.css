@@ -1,27 +1,25 @@
-
 .columns {
     display: flex;
-    border: 1px solid coral;
 }
 
 .columns__item {
+    margin: 0 .5rem;
     width: 300px;
-    border: 1px solid burlywood;
+    border-radius: 5px;
     text-align: center;
 }
 
 .column__title {
     padding: .5rem;
-    background-color: darkgray;
+    color: #E2E2E2;
 }
 
 .ColumnTitle {
-    padding: 3px;
     color: white;
     background-color: #47474A;
     border-radius: 5px;
     border: none;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .ColumnTitle:active, .ColumnTitle:focus {

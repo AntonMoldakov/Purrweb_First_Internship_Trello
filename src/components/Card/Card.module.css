@@ -1,11 +1,32 @@
 .card {
-    width: 90%;
     padding: .5rem 1rem;
     margin-bottom: .5rem;
-    color: white;
-    background-color: dimgray;
+    background-color: #333336;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    color: #E2E2E2;
 }
 
-.card__title {
-    margin-bottom: .5rem;
+.header {
+    text-align: end;
 }
+
+.cross {
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.title {
+    margin: 0 0 .5rem;
+    color: white;
+}
+
+.author {
+    margin-top: .5rem;
+    font-size: 12px;
+    text-align: end;
+    color: #bcbcbc;
+}
+
