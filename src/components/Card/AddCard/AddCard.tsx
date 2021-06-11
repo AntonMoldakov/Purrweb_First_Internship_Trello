@@ -3,11 +3,16 @@ import './AddCard.css'
 import '../../../modal.css'
 import {Form, Field} from 'react-final-form'
 
-function AddCard({addCard, columnId}) {
+interface StandardComponentProps {
+    addCard: any
+    columnId: number
+}
+
+function AddCard({addCard, columnId}: StandardComponentProps) {
     const [isOpen, setIsOpen] = useState(false)
 
-    const onSubmit = values => {
-        addCard(columnId, values.title, values.text)
+    const onSubmit = (event: { title: string; text: string }) => {
+        addCard(columnId, event.title, event.text)
         setIsOpen(false)
     }
 
@@ -29,11 +34,13 @@ function AddCard({addCard, columnId}) {
                                     <h2 className={'form__title'}>Create new card</h2>
                                     <div className={'form__item'}>
                                         <label className={'form__label'}>Card title</label>
-                                        <Field className={'form__field'} name="title" component="input" placeholder="title"/>
+                                        <Field className={'form__field'} name="title" component="input"
+                                               placeholder="title"/>
                                     </div>
                                     <div className={'form__item'}>
                                         <label className={'form__label'}>Card text</label>
-                                        <Field className={'form__field'} name="text" component="textarea" placeholder="text"/>
+                                        <Field className={'form__field'} name="text" component="textarea"
+                                               placeholder="text"/>
                                     </div>
                                     <button type="submit">Create</button>
                                 </form>

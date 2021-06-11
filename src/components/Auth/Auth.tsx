@@ -2,17 +2,16 @@ import React, {useState} from 'react'
 import '../../modal.css'
 import {Form, Field} from 'react-final-form'
 
-function Auth({userNameChange}) {
+function Auth(props: { userNameChange: (name: string) => void }) {
     const [isOpen, setIsOpen] = useState(true)
 
-    const onSubmit = values => {
-        userNameChange(values.name)
+    const onSubmit = (values: { name: string }) => {
+        props.userNameChange(values.name)
         setIsOpen(false)
     }
-
-    return (
-        <div>
-            {isOpen && <div className='modal'>
+    if (isOpen) {
+        return (
+            <div className='modal'>
                 <div className='modal__body'>
                     <div className={'modal__header'}>
                         <button className={'cross'} onClick={() => setIsOpen(false)}>X
@@ -36,9 +35,11 @@ function Auth({userNameChange}) {
                         />
                     </div>
                 </div>
-            </div>}
-        </div>
-    )
+            </div>
+        )
+    }
+    return <div></div>
+
 }
 
 

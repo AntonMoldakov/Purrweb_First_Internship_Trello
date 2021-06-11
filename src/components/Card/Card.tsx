@@ -2,14 +2,24 @@ import React, {useState} from 'react'
 import styles from './Card.module.css'
 import CardChange from "./CardChange/CardChange";
 
-function contentLength(content) {
+
+interface StandardComponentProps {
+    deleteCard: any
+    changeCard: any
+    id: number
+    cardTitle: string
+    cardContent: string
+    author: string
+}
+
+function contentLength(content: string): string {
     if (content.length > 25) {
         return (content.slice(0, 22) + '...')
     }
     return content
 }
 
-function Card({deleteCard, changeCard, id, columnId, cardTitle, cardContent, author}) {
+function Card({deleteCard, changeCard, id, cardTitle, cardContent, author}: StandardComponentProps)  {
     const [isOpen, setIsOpen] = useState(false)
     return (
         <div>

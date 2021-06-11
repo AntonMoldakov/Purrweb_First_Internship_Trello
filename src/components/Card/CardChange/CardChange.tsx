@@ -2,25 +2,33 @@ import React, {useState} from 'react'
 import '../../../modal.css'
 import "./CardChange.css";
 
-function CardChange({id, cardTitle, cardContent, changeCard, setIsOpen}) {
+interface StandardComponentProps {
+    id: number
+    cardTitle: string
+    cardContent: string
+    changeCard: any
+    setIsOpen: any
+}
+
+function CardChange({id, cardTitle, cardContent, changeCard, setIsOpen}: StandardComponentProps) {
     let [titleEditMode, setTitleEditMode] = useState(false);
     let [contentEditMode, setContentEditMode] = useState(false);
     let [title, setTitle] = useState(cardTitle);
     let [content, setContent] = useState(cardContent);
 
-    const activateEditMode = (value) => {
+    const activateEditMode = (value: string) => {
         (value === 'title')? setTitleEditMode(true):setContentEditMode(true)
     }
 
-    const deactivateEditMode = (value) => {
+    const deactivateEditMode = (value: string) => {
         (value === 'title')? setTitleEditMode(false):setContentEditMode(false)
     }
 
-    const onTitleChange = (e) => {
+    const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     }
 
-    const onContentChange = (e) => {
+    const onContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setContent(e.target.value);
     }
 

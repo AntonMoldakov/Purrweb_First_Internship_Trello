@@ -1,7 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, {ReactEventHandler, useEffect, useState} from "react";
 import styles from "../Columns.module.css";
 
-function ColumnTitle({editColumnTitle, columnTitle, id}) {
+interface StandardComponentProps {
+    editColumnTitle: any
+    columnTitle: string
+    id: number
+}
+
+function ColumnTitle({editColumnTitle, columnTitle, id}:StandardComponentProps) {
 
     let [editMode, setEditMode] = useState(false);
     let [title, setTitle] = useState(columnTitle);
@@ -19,12 +25,12 @@ function ColumnTitle({editColumnTitle, columnTitle, id}) {
         editColumnTitle(id, title);
     }
 
-    const onTitleChange = (e) => {
+    const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     }
 
     return (
-        <div>
+        <div className={styles.column__title}>
             {!editMode &&
             <div className={styles.column__title}>
                 <span onDoubleClick={activateEditMode} >{columnTitle || "Column title"}</span>
