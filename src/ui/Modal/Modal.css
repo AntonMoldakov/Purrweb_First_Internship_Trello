@@ -25,7 +25,7 @@
 }
 
 .modal__content {
-    padding: .5rem;
+    padding: .5rem 1.5rem;;
 }
 
 .cross {
@@ -42,7 +42,8 @@
 
 .form__item {
     display: flex;
-    align-items: start;
+    /*align-items: start;*/
+    justify-content: space-between;
     margin-bottom: .5rem;
 }
 
@@ -55,5 +56,23 @@
     width: 70%;
     border: none;
     border-radius: 5px;
+}
+
+.form__field.textarea {
+    height: 200px;
     resize: none;
+}
+
+.btn {
+    padding: .5rem;
+    background: white;
+    border: none;
+    border-radius: 5px;
+    color: rgb(59, 59, 59);
+    cursor: pointer;
+    transition: background-color .2s linear;
+}
+
+.btn:hover {
+    background: #b4b4b4;
 }

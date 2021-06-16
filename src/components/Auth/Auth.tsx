@@ -1,42 +1,22 @@
 import React, {useState} from 'react'
-import '../../modal.css'
-import {Form, Field} from 'react-final-form'
+import Modal from "../../ui/Modal/Modal";
 
 function Auth(props: { userNameChange: (name: string) => void }) {
     const [isOpen, setIsOpen] = useState(true)
 
-    const onSubmit = (values: { name: string }) => {
-        props.userNameChange(values.name)
+    const onSubmit = (values: { [key: string]: string }) => {
+        if (values.name) {
+            props.userNameChange(values.name)
+        } else {
+            props.userNameChange('Guest')
+        }
         setIsOpen(false)
     }
+    const fieldProps = [{type: 'input', label: 'Your name', name: 'name'}]
     if (isOpen) {
-        return (
-            <div className='modal'>
-                <div className='modal__body'>
-                    <div className={'modal__header'}>
-                        <button className={'cross'} onClick={() => setIsOpen(false)}>X
-                        </button>
-                    </div>
-                    <div className="modal__content">
-                        <Form
-                            onSubmit={onSubmit}
-                            // validate={validate}
-                            render={({handleSubmit}) => (
-                                <form onSubmit={handleSubmit}>
-                                    <h2 className={'form__title'}>Auth</h2>
-                                    <div className={'form__item'}>
-                                        <label className={'form__label'}>Your name</label>
-                                        <Field className={'form__field'} name="name" component="input"
-                                               placeholder="name"/>
-                                    </div>
-                                    <button type="submit">Ok</button>
-                                </form>
-                            )}
-                        />
-                    </div>
-                </div>
-            </div>
-        )
+        return <Modal onSubmit={onSubmit} setIsOpen={setIsOpen} title={'Auth'} btnText={'Enter'}
+                      fieldProps={fieldProps}/>
+
     }
     return <div></div>
 

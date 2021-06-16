@@ -1,4 +1,4 @@
-import React, {ReactEventHandler, useEffect, useState} from "react";
+import React, {useState} from "react";
 import styles from "../Columns.module.css";
 
 interface StandardComponentProps {
@@ -11,10 +11,6 @@ function ColumnTitle({editColumnTitle, columnTitle, id}:StandardComponentProps) 
 
     let [editMode, setEditMode] = useState(false);
     let [title, setTitle] = useState(columnTitle);
-
-    // useEffect(() => {
-    //     setTitle(columnTitle);
-    // }, [columnTitle]);
 
     const activateEditMode = () => {
         setEditMode(true);
@@ -30,10 +26,10 @@ function ColumnTitle({editColumnTitle, columnTitle, id}:StandardComponentProps) 
     }
 
     return (
-        <div className={styles.column__title}>
+        <div >
             {!editMode &&
-            <div className={styles.column__title}>
-                <span onDoubleClick={activateEditMode} >{columnTitle || "Column title"}</span>
+            <div className={styles.title}>
+                <span onClick={activateEditMode} >{columnTitle || "Column title"}</span>
             </div>
             }
 
@@ -41,7 +37,7 @@ function ColumnTitle({editColumnTitle, columnTitle, id}:StandardComponentProps) 
             <div>
                 <input onChange={onTitleChange}
                        autoFocus={true}
-                       className={styles.ColumnTitle}
+                       className={styles.editTitle}
                        value={title}
                        onBlur={deactivateEditMode}/>
             </div>

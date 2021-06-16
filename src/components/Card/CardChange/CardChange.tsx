@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import '../../../modal.css'
 import "./CardChange.css";
 
 interface StandardComponentProps {
@@ -11,7 +10,16 @@ interface StandardComponentProps {
 }
 
 function CardChange({id, cardTitle, cardContent, changeCard, setIsOpen}: StandardComponentProps) {
-    let [titleEditMode, setTitleEditMode] = useState(false);
+    const onSubmit = () => {
+
+    }
+
+    const fieldProps = [
+        {type: 'input', label: 'Title', name: 'title'},
+        {type: 'textarea', label: 'Content', name: 'text'}
+    ]
+}
+   /* let [titleEditMode, setTitleEditMode] = useState(false);
     let [contentEditMode, setContentEditMode] = useState(false);
     let [title, setTitle] = useState(cardTitle);
     let [content, setContent] = useState(cardContent);
@@ -85,7 +93,7 @@ function CardChange({id, cardTitle, cardContent, changeCard, setIsOpen}: Standar
             </div>
         </div>
     )
-}
+}*/
 
 
 export default CardChange

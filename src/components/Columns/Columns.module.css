@@ -9,22 +9,18 @@
     text-align: center;
 }
 
-.column__title {
-    padding: .5rem;
+.title {
+    margin-bottom: .5rem;
     color: #E2E2E2;
 }
 
-.ColumnTitle {
-    color: white;
-    background-color: #47474A;
+.editTitle {
+    margin-bottom: .5rem;
     border-radius: 5px;
     border: none;
     font-size: 16px;
 }
 
-.ColumnTitle:active, .ColumnTitle:focus {
+.editTitle:focus {
     outline: none;
-}
-.ColumnTitle::-moz-focus-inner {
-    border: 0;
 }

@@ -24,3 +24,10 @@ code {
   color: white;
   text-align: center;
 }
+
+button:active, button:focus {
+  outline: none;
+}
+button::-moz-focus-inner {
+  border: 0;
+}

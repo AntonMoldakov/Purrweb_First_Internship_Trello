@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import './AddCard.css'
-import '../../../modal.css'
-import {Form, Field} from 'react-final-form'
+import Modal from "../../../ui/Modal/Modal";
 
 interface StandardComponentProps {
     addCard: any
@@ -11,47 +10,24 @@ interface StandardComponentProps {
 function AddCard({addCard, columnId}: StandardComponentProps) {
     const [isOpen, setIsOpen] = useState(false)
 
-    const onSubmit = (event: { title: string; text: string }) => {
-        addCard(columnId, event.title, event.text)
+    const onSubmit = (values: {[key: string]: string}): void => {
+        addCard(columnId, values.title, values.text)
         setIsOpen(false)
     }
+
+    const fieldProps = [
+        {type: 'input', label: 'Title', name: 'title'},
+        {type: 'textarea', label: 'Content', name: 'text'}
+        ]
 
     return (
         <React.Fragment>
             <button className={'btn-add-card'} onClick={() => setIsOpen(true)}>Add card</button>
-            {isOpen && <div className='modal'>
-                <div className='modal__body'>
-                    <div className={'modal__header'}>
-                        <button className={'cross'} onClick={() => setIsOpen(false)}>X
-                        </button>
-                    </div>
-                    <div className="modal__content">
-                        <Form
-                            onSubmit={onSubmit}
-                            // validate={validate}
-                            render={({handleSubmit}) => (
-                                <form onSubmit={handleSubmit}>
-                                    <h2 className={'form__title'}>Create new card</h2>
-                                    <div className={'form__item'}>
-                                        <label className={'form__label'}>Card title</label>
-                                        <Field className={'form__field'} name="title" component="input"
-                                               placeholder="title"/>
-                                    </div>
-                                    <div className={'form__item'}>
-                                        <label className={'form__label'}>Card text</label>
-                                        <Field className={'form__field'} name="text" component="textarea"
-                                               placeholder="text"/>
-                                    </div>
-                                    <button type="submit">Create</button>
-                                </form>
-                            )}
-                        />
-                    </div>
-                </div>
-            </div>}
+            {isOpen && <Modal onSubmit={onSubmit} setIsOpen={setIsOpen}
+                              title={'Create card'} btnText={'Create'}
+                              fieldProps={fieldProps}/>}
         </React.Fragment>
     )
 }
-
 
 export default AddCard
