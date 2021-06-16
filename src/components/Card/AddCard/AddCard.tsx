@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import './AddCard.css'
 import Modal from "../../../ui/Modal/Modal";
+import Button from "../../../style/Button";
 
 interface StandardComponentProps {
     addCard: any
@@ -22,7 +22,7 @@ function AddCard({addCard, columnId}: StandardComponentProps) {
 
     return (
         <React.Fragment>
-            <button className={'btn-add-card'} onClick={() => setIsOpen(true)}>Add card</button>
+            <Button addCard onClick={() => setIsOpen(true)}>Add card</Button>
             {isOpen && <Modal onSubmit={onSubmit} setIsOpen={setIsOpen}
                               title={'Create card'} btnText={'Create'}
                               fieldProps={fieldProps}/>}

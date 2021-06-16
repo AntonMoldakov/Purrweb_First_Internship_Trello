@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import styles from './Card.module.css'
 import Modal from "../../ui/Modal/Modal";
+import Button from '../../style/Button';
+import TitleH4 from "../../style/TitleH4";
 
 
 interface StandardComponentProps {
@@ -41,9 +43,9 @@ function Card({deleteCard, changeCard, id, cardTitle, cardContent, author}: Stan
                 setIsOpen(true)
             }} className={styles.card}>
                 <div className={styles.header}>
-                    <button className={styles.cross} onClick={() => deleteCard(id)}>X</button>
+                    <Button cross onClick={() => deleteCard(id)}>X</Button>
                 </div>
-                <h4 className={styles.title}>{cardTitle}</h4>
+                <TitleH4>{cardTitle}</TitleH4>
                 <div>
                     {contentLength(cardContent)}
                 </div>

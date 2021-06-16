@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import styles from "../Columns.module.css";
+import TitleH4 from "../../../style/TitleH4";
+import Input from "../../../style/Input";
 
 interface StandardComponentProps {
     editColumnTitle: any
@@ -28,16 +30,15 @@ function ColumnTitle({editColumnTitle, columnTitle, id}:StandardComponentProps) 
     return (
         <div >
             {!editMode &&
-            <div className={styles.title}>
-                <span onClick={activateEditMode} >{columnTitle || "Column title"}</span>
+            <div>
+                <TitleH4 onClick={activateEditMode} cursor={'pointer'} >{columnTitle || "Column title"}</TitleH4>
             </div>
             }
 
             {editMode &&
             <div>
-                <input onChange={onTitleChange}
+                <Input onChange={onTitleChange}
                        autoFocus={true}
-                       className={styles.editTitle}
                        value={title}
                        onBlur={deactivateEditMode}/>
             </div>

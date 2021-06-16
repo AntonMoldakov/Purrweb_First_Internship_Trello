@@ -1,6 +1,7 @@
-import React, {useState, FC} from 'react'
+import React, {useState} from 'react'
 import Columns from "./components/Columns/Columns";
 import Auth from "./components/Auth/Auth";
+import Wrapper from "./style/Wrapper";
 
 function App() {
     const [userName, setUserName] = useState<string>('Guest')
@@ -16,8 +17,6 @@ function App() {
         {id: 3, columnTitle: 'Testing'},
         {id: 4, columnTitle: 'Done'}
     ])
-
-    // const [loading, setLoading] = React.useState(true)
 
     function addColumn(columnTitle: string) {
         setColumns(columns.concat([{
@@ -64,14 +63,14 @@ function App() {
     }
 
     return (
-        <div className='wrapper'>
+        <Wrapper>
             <Auth userNameChange={userNameChange}/>
             <h1>TrelloCopy</h1>
             <Columns cards={cards} columns={columns}
                      addColumn={addColumn} editColumnTitle={editColumnTitle}
                      addCard={addCard} deleteCard={deleteCard} changeCard={changeCard}/>
 
-        </div>
+        </Wrapper>
     )
 }
 

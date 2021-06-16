@@ -1,6 +1,6 @@
 import React from 'react'
-import styles from './Columns.module.css'
 import Column from "./Column/Column"
+import Flex from "../../style/Flex";
 
 interface StandardComponentProps {
     cards: object[]
@@ -18,13 +18,13 @@ function distributionCards(cards: any[], columnId: number): {id: number, columnI
 
 function Columns({cards, columns, addColumn, editColumnTitle, addCard, deleteCard, changeCard}: StandardComponentProps) {
     return (
-        <div className={styles.columns}>
+        <Flex>
             {
                 columns.map(column => <Column key={column.id} cards={distributionCards(cards, column.id)}
                                               editColumnTitle={editColumnTitle} addCard={addCard}
                                               deleteCard={deleteCard} changeCard={changeCard} {...column}/>)
             }
-        </div>
+        </Flex>
     )
 }
 
