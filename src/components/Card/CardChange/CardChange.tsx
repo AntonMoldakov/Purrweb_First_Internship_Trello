@@ -1,12 +1,6 @@
 import React from "react";
-import {Field, Form} from "react-final-form";
-import Button from "../../../style/Button";
-import TitleH2 from "../../../style/TitleH2";
-import Flex from "../../../style/Flex";
-import Position from "../../../style/Position";
-import CreateField from "../../../ui/CreateField/CreateField";
-import Modals from "../../../style/Modals";
-import ModalBody from "../../../style/ModalBody";
+import {Form} from "react-final-form";
+import {Button, TitleH2, Flex, Position, Modals, ModalBody, CreateField} from "../../../ui/index";
 import CardComments from "../CardComments/CardComments";
 
 interface StandardComponentProps {

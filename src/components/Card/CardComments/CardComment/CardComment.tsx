@@ -1,8 +1,5 @@
 import React from "react";
-import Flex from "../../../../style/Flex";
-import Button from "../../../../style/Button";
-import Block from "../../../../style/Block";
-import TitleH4 from "../../../../style/TitleH4";
+import {Flex, Button, Block, TitleH4} from "../../../../ui/index";
 import CommentMessage from "./CommentMessage";
 
 interface StandardComponentProps {

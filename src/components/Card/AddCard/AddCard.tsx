@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Modal from "../../../ui/Modal/Modal";
-import Button from "../../../style/Button";
+import Button from "../../../ui/Button/Button";
 
 interface StandardComponentProps {
     addCard: any

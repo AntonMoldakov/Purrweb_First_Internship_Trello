@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-import styles from "../Columns.module.css";
-import TitleH4 from "../../../style/TitleH4";
-import Input from "../../../style/Input";
+import {TitleH4, Input} from "../../../ui/index";
 
 interface StandardComponentProps {
     editColumnTitle: any

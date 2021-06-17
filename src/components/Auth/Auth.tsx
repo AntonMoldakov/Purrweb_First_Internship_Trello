@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import Modal from "../../ui/Modal/Modal";
+import {Modal} from "../../ui/index";
 
 function Auth(props: { userNameChange: (name: string) => void }) {
     const [isOpen, setIsOpen] = useState(true)

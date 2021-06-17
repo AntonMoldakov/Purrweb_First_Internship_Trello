@@ -1,6 +1,6 @@
 import React from 'react'
 import Column from "./Column/Column"
-import Flex from "../../style/Flex";
+import {Flex} from "../../ui/index";
 
 interface StandardComponentProps {
     cards: object[]

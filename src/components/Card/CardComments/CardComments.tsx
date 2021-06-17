@@ -1,5 +1,5 @@
 import React from "react";
-import Comments from "../../../style/Comments";
+import {Comments} from "../../../ui/index";
 import CardComment from "./CardComment/CardComment";
 
 interface StandardComponentProps {

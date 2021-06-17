@@ -1,13 +1,7 @@
 import React from "react";
 import {Form} from "react-final-form";
-import Button from "../../style/Button";
 import './Modal.css'
-import TitleH2 from "../../style/TitleH2";
-import Flex from "../../style/Flex";
-import Position from "../../style/Position";
-import Modals from "../../style/Modals";
-import ModalBody from "../../style/ModalBody";
-import CreateField from "../CreateField/CreateField";
+import {Flex, Position, Modals, ModalBody, CreateField, TitleH2, Button} from "../index";
 
 interface StandardComponentProps {
     onSubmit: (values: { [key: string]: string }) => void

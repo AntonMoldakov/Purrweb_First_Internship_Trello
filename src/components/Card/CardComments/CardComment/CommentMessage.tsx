@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-import TitleH4 from "../../../../style/TitleH4";
-import Input from "../../../../style/Input";
-import TextArea from "../../../../style/TextArea";
+import {TextArea} from "../../../../ui/index";
 
 interface StandardComponentProps {
     changeComment: (id: number, message: string) => void

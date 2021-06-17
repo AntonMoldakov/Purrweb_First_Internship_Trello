@@ -1,5 +1,4 @@
-import Flex from "../../style/Flex";
-import Label from "../../style/Label";
+import {Flex, Label} from "../index";
 import {Field} from "react-final-form";
 import React from "react";
 

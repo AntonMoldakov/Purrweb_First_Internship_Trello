@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Columns from "./components/Columns/Columns";
 import Auth from "./components/Auth/Auth";
-import Wrapper from "./style/Wrapper";
+import {Wrapper} from "./ui/index";
 
 function App() {
+
     const [userName, setUserName] = useState<string>('Guest')
     const [cards, setCards] = useState([
         {id: 1, columnId: 1, cardTitle: 'Card 1', cardContent: 'fdsfsd fsd fsd fsd fsd fsdff', author: 'Anton'},
@@ -22,6 +23,10 @@ function App() {
         {id: 3, columnTitle: 'Testing'},
         {id: 4, columnTitle: 'Done'}
     ])
+
+    useEffect(()=> {
+        localStorage.state={cards, comments, columns}
+    }, [cards, comments, columns])
 
     function addColumn(columnTitle: string) {
         setColumns(columns.concat([{

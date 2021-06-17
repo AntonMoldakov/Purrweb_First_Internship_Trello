@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import styles from './Card.module.css'
-import Modal from "../../ui/Modal/Modal";
-import Button from '../../style/Button';
-import TitleH4 from "../../style/TitleH4";
+import {TitleH4, Button} from "../../ui/index";
 import CardChange from './CardChange/CardChange';
 
 

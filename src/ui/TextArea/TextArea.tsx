@@ -9,6 +9,7 @@ const StyledTextArea = styled.textarea`
     resize: none
 `
 
+
 const TextArea = (props: any) => {
 
     return <StyledTextArea {...props}/>

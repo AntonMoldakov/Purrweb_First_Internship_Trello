@@ -2,7 +2,7 @@ import React from 'react'
 import Card from "../../Card/Card";
 import ColumnTitle from "./ColumnTitle";
 import AddCard from "../../Card/AddCard/AddCard";
-import FlexItem from '../../../style/FlexItem';
+import {FlexItem} from '../../../ui/index';
 
 interface StandardComponentProps {
     cards: {id: number, columnId: number, cardTitle: string, cardContent: string, author: string}[]
