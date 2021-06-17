@@ -4,7 +4,7 @@ import {Modal} from "../../ui/index";
 function Auth(props: { userNameChange: (name: string) => void }) {
     const [isOpen, setIsOpen] = useState(true)
 
-    const onSubmit = (values: { [key: string]: string }) => {
+    const onSubmit = (values: { name: string }) => {
         if (values.name) {
             props.userNameChange(values.name)
         } else {

@@ -4,7 +4,10 @@ import './Modal.css'
 import {Flex, Position, Modals, ModalBody, CreateField, TitleH2, Button} from "../index";
 
 interface StandardComponentProps {
-    onSubmit: (values: { [key: string]: string }) => void
+    onSubmit: (values: {
+        name: string
+
+    }) => void
     setIsOpen: (value: boolean) => void
     title?: string
     btnText: string

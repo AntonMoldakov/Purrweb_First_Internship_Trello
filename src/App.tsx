@@ -5,7 +5,7 @@ import {Wrapper} from "./ui/index";
 
 function App() {
 
-    const [userName, setUserName] = useState<string>('Guest')
+    const [userName, setUserName] = useState('Guest')
     const [cards, setCards] = useState([
         {id: 1, columnId: 1, cardTitle: 'Card 1', cardContent: 'fdsfsd fsd fsd fsd fsd fsdff', author: 'Anton'},
         {id: 2, columnId: 1, cardTitle: 'Card 1', cardContent: 'fdsfsd fsfsd fsdff', author: 'Anton'},
