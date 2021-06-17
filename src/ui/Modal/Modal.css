@@ -6,6 +6,7 @@
 }
 
 .form__field.textarea {
-    height: 200px;
-    resize: none;
+    max-height: 200px;
+    min-height: 30px;
+    resize: vertical;
 }

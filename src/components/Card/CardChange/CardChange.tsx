@@ -1,99 +1,78 @@
-import React, {useState} from 'react'
-import "./CardChange.css";
+import React from "react";
+import {Field, Form} from "react-final-form";
+import Button from "../../../style/Button";
+import TitleH2 from "../../../style/TitleH2";
+import Flex from "../../../style/Flex";
+import Position from "../../../style/Position";
+import CreateField from "../../../ui/CreateField/CreateField";
+import Modals from "../../../style/Modals";
+import ModalBody from "../../../style/ModalBody";
+import CardComments from "../CardComments/CardComments";
 
 interface StandardComponentProps {
+    onSubmit: (values: { [key: string]: string }) => void
+    SendMessage: (values: { [key: string]: string }) => void
+    setIsOpen: (value: boolean) => void
+    title?: string
+    btnText: string
+    fieldProps: {
+        [key: string]: string
+    }[]
     id: number
-    cardTitle: string
-    cardContent: string
-    changeCard: any
-    setIsOpen: any
+    comments: {
+        comments: {
+            cardId: number, id: number,
+            author: string, message: string,
+        }[]
+        addComments: (id: number, message: string) => void
+        changeComment: any
+        deleteComment: any
+    }
 }
 
-function CardChange({id, cardTitle, cardContent, changeCard, setIsOpen}: StandardComponentProps) {
-    const onSubmit = () => {
-
-    }
-
-    const fieldProps = [
-        {type: 'input', label: 'Title', name: 'title'},
-        {type: 'textarea', label: 'Content', name: 'text'}
-    ]
-}
-   /* let [titleEditMode, setTitleEditMode] = useState(false);
-    let [contentEditMode, setContentEditMode] = useState(false);
-    let [title, setTitle] = useState(cardTitle);
-    let [content, setContent] = useState(cardContent);
-
-    const activateEditMode = (value: string) => {
-        (value === 'title')? setTitleEditMode(true):setContentEditMode(true)
-    }
-
-    const deactivateEditMode = (value: string) => {
-        (value === 'title')? setTitleEditMode(false):setContentEditMode(false)
-    }
-
-    const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value);
-    }
-
-    const onContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setContent(e.target.value);
-    }
-
-    const onSubmit = () => {
-        changeCard(id, title, content)
-        setIsOpen(false)
-    }
-
+function Modal({onSubmit, setIsOpen, fieldProps, id, comments, SendMessage}: StandardComponentProps) {
     return (
-        <div>
-             <div className='modal'>
-                <div className='modal__body'>
-                    <div className={'modal__header'}>
-                        <button className={'cross'} onClick={() => setIsOpen(false)}>X
-                        </button>
-                    </div>
-                    <div className="modal__content">
-                        <div>
-                            {!titleEditMode &&
-                            <div className={'text text-title'}>
-                                <span onDoubleClick={activateEditMode.bind(null, 'title')}>{title || "Card title"}</span>
-                            </div>
-                            }
-                            {titleEditMode &&
-                            <div>
-                                <input onChange={onTitleChange}
-                                       autoFocus={true}
-                                       className={'edit edit__title'}
-                                       value={title}
-                                       onBlur={deactivateEditMode.bind(null, 'title')}/>
-                            </div>
-                            }
-                        </div>
+        <Modals>
+            <ModalBody>
+                <Flex justifyContent={'flex-end'} padding={'.5rem'}>
+                    <Button cross onClick={() => setIsOpen(false)}>X
+                    </Button>
+                </Flex>
+                <Position padding={'.5rem 1.5rem'}>
+                    <Form
+                        onSubmit={onSubmit}
+                        render={({handleSubmit}) => (
+                            <form onSubmit={handleSubmit}>
+                                {
+                                    fieldProps.map(field => CreateField(field))
+                                }
+                                <Button sub type="submit">Save</Button>
+                            </form>
+                        )}
+                    />
+                    <hr/>
+                    <Form
+                        onSubmit={SendMessage}
+                        render={({handleSubmit}) => (
+                            <form onSubmit={handleSubmit}>
+                                <TitleH2>Comments</TitleH2>
+                                <Flex justifyContent={'space-between'} alignItems={'flex-end'}>
+                                    {
+                                        CreateField({type: 'textarea', name: 'comment'})
+                                    }
+                                    <Button sub type="submit">Send</Button>
+                                </Flex>
+                            </form>
+                        )}
+                    />
 
-                        <div>
-                            {!contentEditMode &&
-                            <div className={'text text-content'}>
-                                <span onDoubleClick={activateEditMode.bind(null, 'content')}>{content || "Card content"}</span>
-                            </div>
-                            }
-                            {contentEditMode &&
-                            <div>
-                                <textarea onChange={onContentChange}
-                                       autoFocus={true}
-                                       className={'edit edit__content'}
-                                       value={content}
-                                       onBlur={deactivateEditMode.bind(null, 'content')}/>
-                            </div>
-                            }
-                        </div>
-                        <button onClick={onSubmit}>Ok</button>
+                    <div>
+                        <CardComments {...comments} id={id}/>
                     </div>
-                </div>
-            </div>
-        </div>
+                </Position>
+            </ModalBody>
+        </Modals>
     )
-}*/
+}
 
-
-export default CardChange
+export default Modal

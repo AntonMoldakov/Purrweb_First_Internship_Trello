@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledModals = styled.div`
+
     padding-top: 5rem;
     position: fixed;
     top: 0;

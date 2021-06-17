@@ -7,6 +7,8 @@ const StyledModalBody = styled.div`
        height: fit-content;
        border-radius: 5px;
        background: #343434;
+       max-height: 85vh;
+       overflow: auto;
 
 `
 

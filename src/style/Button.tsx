@@ -9,6 +9,7 @@ const StyledButton = styled.button<{ [key: string]: boolean }>`
     border: 0;
     }
     ${({sub}) => sub && css`
+        margin: .5rem 0;
          padding: .5rem;
          background: white;
          border: none;

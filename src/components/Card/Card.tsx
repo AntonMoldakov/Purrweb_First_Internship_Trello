@@ -3,6 +3,7 @@ import styles from './Card.module.css'
 import Modal from "../../ui/Modal/Modal";
 import Button from '../../style/Button';
 import TitleH4 from "../../style/TitleH4";
+import CardChange from './CardChange/CardChange';
 
 
 interface StandardComponentProps {
@@ -12,6 +13,15 @@ interface StandardComponentProps {
     cardTitle: string
     cardContent: string
     author: string
+    comments: {
+        comments: {
+            cardId: number, id: number,
+            author: string, message: string,
+        }[]
+        addComments: (id: number, message: string) => void
+        changeComment: any
+        deleteComment: any
+    }
 }
 
 function contentLength(content: string): string {
@@ -21,12 +31,18 @@ function contentLength(content: string): string {
     return content
 }
 
-function Card({deleteCard, changeCard, id, cardTitle, cardContent, author}: StandardComponentProps)  {
+function Card({deleteCard, changeCard, comments, id, cardTitle, cardContent, author}: StandardComponentProps) {
     const [isOpen, setIsOpen] = useState(false)
 
-    const onSubmit = (values: {[key: string]: string}) => {
+    const onSubmit = (values: { [key: string]: string }) => {
         changeCard(id, values.title, values.text)
         setIsOpen(false)
+    }
+    const SendMessage = (values: { [key: string]: string }) => {
+        if (values.comment || values.comment !== '') {
+            comments.addComments(id, values.comment)
+        }
+        values.comment = ''
     }
 
     const fieldProps = [
@@ -36,8 +52,9 @@ function Card({deleteCard, changeCard, id, cardTitle, cardContent, author}: Stan
     return (
         <div>
             {
-                isOpen && <Modal onSubmit={onSubmit} setIsOpen={setIsOpen}
-                                 btnText={'Save'} fieldProps={fieldProps}/>
+                isOpen && <CardChange onSubmit={onSubmit} setIsOpen={setIsOpen}
+                                      btnText={'Save'} fieldProps={fieldProps}
+                                      id={id} comments={comments} SendMessage={SendMessage}/>
             }
             <div onClick={() => {
                 setIsOpen(true)

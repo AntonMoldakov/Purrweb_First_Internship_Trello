@@ -6,5 +6,8 @@
         <language minSize="59" name="JavaScript" />
       </Languages>
     </inspection_tool>
+    <inspection_tool class="RequiredAttributes" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myAdditionalRequiredHtmlAttributes" value="SendMessage" />
+    </inspection_tool>
   </profile>
 </component>

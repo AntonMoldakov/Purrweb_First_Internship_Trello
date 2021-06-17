@@ -12,15 +12,16 @@ interface StandardComponentProps {
     changeCard: (id: number, cardTitle: string, cardContent: string) => void
     id: number
     columnTitle: string
+    comments: any
 }
 
 
-function Column({cards, editColumnTitle, addCard, deleteCard, changeCard, id, columnTitle}: StandardComponentProps) {
+function Column({cards, editColumnTitle, addCard, deleteCard, changeCard, id, columnTitle, comments}: StandardComponentProps) {
     return (
         <FlexItem column>
             <ColumnTitle editColumnTitle={editColumnTitle} columnTitle={columnTitle} id={id}/>
             {
-                cards.map(card => <Card key={card.id}  deleteCard={deleteCard} changeCard={changeCard} {...card}/>)
+                cards.map(card => <Card key={card.id}  deleteCard={deleteCard} changeCard={changeCard} comments={comments} {...card}/>)
             }
             <div>
                 <AddCard addCard={addCard} columnId={id}/>

@@ -1,13 +1,13 @@
 import React from "react";
-import {Field, Form} from "react-final-form";
+import {Form} from "react-final-form";
 import Button from "../../style/Button";
 import './Modal.css'
 import TitleH2 from "../../style/TitleH2";
 import Flex from "../../style/Flex";
 import Position from "../../style/Position";
-import Label from "../../style/Label";
 import Modals from "../../style/Modals";
 import ModalBody from "../../style/ModalBody";
+import CreateField from "../CreateField/CreateField";
 
 interface StandardComponentProps {
     onSubmit: (values: { [key: string]: string }) => void
@@ -17,38 +17,6 @@ interface StandardComponentProps {
     fieldProps: {
         [key: string]: string
     }[]
-}
-
-const required = (v:string) => {
-    if (!v || v === '') {
-        return 'This field is required'
-    }
-    return undefined
-}
-
-
-function CreateField({type, label, name, value}: { [key: string]: string }) {
-    switch (type) {
-        case 'input': {
-            return (
-                <Flex justifyContent={'space-between'} margin={'0 0 .5rem'}>
-                    {label && <Label margin={'0 .5rem 0 0'}>{label}</Label>}
-                    <Field className={'form__field'} name={name}
-                           component={type} placeholder={name}
-                           defaultValue={value} validate={required}/>
-                </Flex>
-            )
-        }
-        case 'textarea': {
-            return (
-                <Flex justifyContent={'space-between'} margin={'0 0 0.5rem'}>
-                    {label && <Label margin={'0 .5rem 0 0'}>{label}</Label>}
-                    <Field className={'form__field textarea'} name={name} component={type}
-                           placeholder={name} defaultValue={value}/>
-                </Flex>
-            )
-        }
-    }
 }
 
 function Modal({onSubmit, setIsOpen, title, btnText, fieldProps}: StandardComponentProps) {
@@ -62,7 +30,6 @@ function Modal({onSubmit, setIsOpen, title, btnText, fieldProps}: StandardCompon
                 <Position padding={'.5rem 1.5rem'}>
                     <Form
                         onSubmit={onSubmit}
-                        // validate={validate}
                         render={({handleSubmit}) => (
                             <form onSubmit={handleSubmit}>
                                 <TitleH2>{title ? title : null}</TitleH2>

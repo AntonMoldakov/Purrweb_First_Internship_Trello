@@ -11,6 +11,11 @@ function App() {
         {id: 3, columnId: 2, cardTitle: 'Card 2', cardContent: 'fdsfsd fsd dasdfsd fsd fsd fsdff', author: 'Gleb'},
         {id: 4, columnId: 3, cardTitle: 'Card 3', cardContent: 'fdsffsd fsd fsd fsdff', author: 'Arthur'}
     ])
+    const [comments, setComments] = useState([
+        {id: 124, cardId: 1, message: 'hhahahaahhah', author: 'Anton'},
+        {id: 12234, cardId: 1, message: 'hhh ok', author: 'Gleb'},
+        {id: 14, cardId: 2, message: 'hhahah  ffffhah', author: 'Beb'}
+    ])
     const [columns, setColumns] = useState([
         {id: 1, columnTitle: 'TODO'},
         {id: 2, columnTitle: 'In Progress'},
@@ -58,8 +63,31 @@ function App() {
         }))
     }
 
+
     function userNameChange(userName: string): void {
         setUserName(userName)
+    }
+
+    function addComments(id: number, message: string) {
+        setComments(comments.concat([{
+            id: +(new Date()),
+            cardId: id,
+            message,
+            author: userName
+        }]))
+    }
+
+    function changeComment(id: number, message: string) {
+        setComments(comments.map(comment => {
+            if(comment.id === id) {
+                comment.message = message
+            }
+            return comment
+        }))
+    }
+
+    function deleteComment(id: number) {
+        setComments(comments.filter(comment => comment.id !== id))
     }
 
     return (
@@ -68,7 +96,8 @@ function App() {
             <h1>TrelloCopy</h1>
             <Columns cards={cards} columns={columns}
                      addColumn={addColumn} editColumnTitle={editColumnTitle}
-                     addCard={addCard} deleteCard={deleteCard} changeCard={changeCard}/>
+                     addCard={addCard} deleteCard={deleteCard}
+                     changeCard={changeCard} comments={{addComments, changeComment, deleteComment, comments}}/>
 
         </Wrapper>
     )

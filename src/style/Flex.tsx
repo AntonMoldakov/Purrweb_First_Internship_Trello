@@ -7,8 +7,9 @@ interface InterfaceStyles {
 
 const StyledFlex = styled.div<InterfaceStyles>`
     display: flex;
-     
+    width: 100%;
     justify-content: ${({justifyContent}: InterfaceStyles) => justifyContent || 'flex-start'};
+    align-items: ${({alignItems}: InterfaceStyles) => alignItems || 'stretch'};
     margin: ${({margin}: InterfaceStyles) => margin || 0};
     padding: ${({padding}: InterfaceStyles) => padding || 0};
     
