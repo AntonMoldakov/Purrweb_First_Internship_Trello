@@ -2,7 +2,7 @@ import React from 'react'
 import Card from "../../Card/Card";
 import ColumnTitle from "./ColumnTitle";
 import AddCard from "../../Card/AddCard/AddCard";
-import {FlexItem} from '../../../ui/index';
+import {FlexItem, Modal} from '../../../ui/index';
 
 interface IProps {
     cards: {

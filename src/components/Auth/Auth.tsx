@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import {Modal} from "../../ui/index";
+import AuthBody from './AuthBody';
 
 function Auth(props: { userNameChange: (name: string) => void }) {
     const [isOpen, setIsOpen] = useState(true)
 
-    const onSubmit = (values: { name?: string }) => {
+    const onSubmit = (values: { name: string }) => {
         if (values.name) {
             props.userNameChange(values.name)
         } else {
@@ -12,10 +13,9 @@ function Auth(props: { userNameChange: (name: string) => void }) {
         }
         setIsOpen(false)
     }
-    const fieldProps = [{type: 'input', label: 'Your name', name: 'name'}]
+
     if (isOpen) {
-        return <Modal onSubmit={onSubmit} setIsOpen={setIsOpen} title={'Auth'} btnText={'Enter'}
-                      fieldProps={fieldProps}/>
+        return <Modal children={<AuthBody onSubmit={onSubmit}/>} setIsOpen={setIsOpen} title={'Auth'}/>
 
     }
     return <div/>

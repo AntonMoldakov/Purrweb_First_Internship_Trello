@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import styles from './Card.module.css'
-import {TitleH4, Button} from "../../ui/index";
+import {TitleH4, Button, Modal} from "../../ui/index";
 import CardChange from './CardChange/CardChange';
+import AuthBody from "../Auth/AuthBody";
 
 
 interface IProps {
@@ -29,9 +30,8 @@ function Card({cardProps, comments}: IProps) {
     const card = cardProps.card
     const [isOpen, setIsOpen] = useState(false)
 
-    const onSubmit = (values: { title: string, text:string }) => {
+    const onSubmit = (values: { title: string, text: string }) => {
         cardProps.changeCard(card.id, values.title, values.text)
-        setIsOpen(false)
     }
     const SendComment = (values: { comment: string }) => {
         if (values.comment || values.comment !== '') {
@@ -39,17 +39,14 @@ function Card({cardProps, comments}: IProps) {
         }
         values.comment = ''
     }
-
-    const fieldProps = [
-        {type: 'input', value: card.cardTitle, name: 'title'},
-        {type: 'textarea', value: card.cardContent, name: 'text'}
-    ]
     return (
         <div>
             {
-                isOpen && <CardChange onSubmit={onSubmit} setIsOpen={setIsOpen}
-                                      btnText={'Save'} fieldProps={fieldProps}
-                                      id={card.id} comments={comments} SendComment={SendComment}/>
+                isOpen && <Modal children={<CardChange
+                    onSubmit={onSubmit} id={card.id}
+                    cardTitle={card.cardTitle} cardContent={card.cardContent}
+                    SendComment={SendComment} comments={comments}/>}
+                                 setIsOpen={setIsOpen} title={''}/>
             }
             <div onClick={() => {
                 setIsOpen(true)

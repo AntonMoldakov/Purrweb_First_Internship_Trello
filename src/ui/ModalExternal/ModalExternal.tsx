@@ -15,11 +15,11 @@ const StyledModals = styled.div`
     
 `
 
-const Modals = (props: any) => {
+const ModalExternal = (props: any) => {
     return <StyledModals {...props}/>
 }
 
-export default Modals
+export default ModalExternal
 
 
 

@@ -68,12 +68,12 @@ function App() {
     }
 
     function addComment(id: number, message: string) {
-        setComments(comments.concat([{
+        setComments([{
             id: +(new Date()),
             cardId: id,
             message,
             author: userName
-        }]))
+        }].concat(comments))
     }
 
     function changeComment(id: number, message: string) {

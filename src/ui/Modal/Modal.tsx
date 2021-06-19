@@ -1,41 +1,44 @@
 import React from "react";
-import {Form} from "react-final-form";
 import './Modal.css'
-import {Flex, Position, Modals, ModalBody, CreateField, TitleH2, Button} from "../index";
+import {Flex, Position, ModalExternal, ModalBody, TitleH2, Button} from "../index";
 
 interface IProps {
-    onSubmit: (values: { title: string, text: string ,  name?: string }) => void,
     setIsOpen: (value: boolean) => void,
     title?: string,
-    btnText: string,
-    fieldProps: { type: string, label?: string, value?: string, name: string }[]
+    children: any
 }
 
-function Modal({onSubmit, setIsOpen, title, btnText, fieldProps}: IProps) {
+function Modal({setIsOpen, title, children}: IProps) {
     return (
-        <Modals>
+        <ModalExternal>
             <ModalBody>
-                <Flex justifyContent={'flex-end'} padding={'.5rem'}>
+                <Flex justifyContent={'space-between'} padding={'.5rem .5rem .5rem 2rem'}>
+                    <TitleH2>{title ? title : null}</TitleH2>
                     <Button cross onClick={() => setIsOpen(false)}>X
                     </Button>
                 </Flex>
                 <Position padding={'.5rem 1.5rem'}>
-                    <Form
-                        onSubmit={onSubmit}
-                        render={({handleSubmit}) => (
-                            <form onSubmit={handleSubmit}>
-                                <TitleH2>{title ? title : null}</TitleH2>
-                                {
-                                    fieldProps.map(field => CreateField(field))
-                                }
-                                <Button sub type="submit">{btnText}</Button>
-                            </form>
-                        )}
-                    />
+                    {children}
                 </Position>
             </ModalBody>
-        </Modals>
+        </ModalExternal>
     )
 }
 
 export default Modal
+
+
+
+/*
+<Form
+onSubmit={onSubmit}
+render={({handleSubmit}) => (
+    <form onSubmit={handleSubmit}>
+        <TitleH2>{title ? title : null}</TitleH2>
+        {
+            fieldProps.map(field => CreateField(field))
+        }
+        <Button sub type="submit">{btnText}</Button>
+    </form>
+)}
+/>*/
