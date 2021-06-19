@@ -2,15 +2,15 @@ import React, {useState} from 'react'
 import Modal from "../../../ui/Modal/Modal";
 import Button from "../../../ui/Button/Button";
 
-interface StandardComponentProps {
-    addCard: any
+interface IProps {
+    addCard: (columnId: number, cardTitle: string, cardContent: string) => void,
     columnId: number
 }
 
-function AddCard({addCard, columnId}: StandardComponentProps) {
+function AddCard({addCard, columnId}: IProps) {
     const [isOpen, setIsOpen] = useState(false)
 
-    const onSubmit = (values: {[key: string]: string}): void => {
+    const onSubmit = (values: { title: string, text: string }): void => {
         addCard(columnId, values.title, values.text)
         setIsOpen(false)
     }
@@ -18,7 +18,7 @@ function AddCard({addCard, columnId}: StandardComponentProps) {
     const fieldProps = [
         {type: 'input', label: 'Title', name: 'title'},
         {type: 'textarea', label: 'Content', name: 'text'}
-        ]
+    ]
 
     return (
         <React.Fragment>

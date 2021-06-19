@@ -2,29 +2,33 @@ import React from 'react'
 import Column from "./Column/Column"
 import {Flex} from "../../ui/index";
 
-interface StandardComponentProps {
-    cards: object[]
-    columns: {id: number, columnTitle: string}[]
-    addColumn: any
-    editColumnTitle: any
-    addCard: any
-    deleteCard: any
-    changeCard: any
-    comments: any
+interface IProps {
+    cards: {
+        cards: { id: number, columnId: number, cardTitle: string, cardContent: string, author: string }[],
+        addCard: (columnId: number, cardTitle: string, cardContent: string) => void,
+        deleteCard: (id: number) => void,
+        changeCard: (id: number, cardTitle: string, cardContent: string) => void,
+    },
+    columns: {
+        columns: { id: number, columnTitle: string }[]
+        editColumnTitle: (id: number, title: string) => void
+
+    },
+    comments: {
+        comments: { id: number, cardId: number, message: string, author: string }[]
+        addComment: (id: number, message: string) => void,
+        changeComment: (id: number, message: string) => void,
+        deleteComment: (id: number) => void,
+    }
 }
 
-function distributionCards(cards: any[], columnId: number): {id: number, columnId: number, cardTitle: string, cardContent: string, author: string}[] {
-    return cards.filter(cards => cards.columnId === columnId)
-}
-
-function Columns({cards, columns, addColumn, editColumnTitle, addCard, deleteCard, changeCard, comments}: StandardComponentProps) {
+function Columns({cards, columns, comments}: IProps) {
     return (
         <Flex>
             {
-                columns.map(column => <Column key={column.id} cards={distributionCards(cards, column.id)}
-                                              editColumnTitle={editColumnTitle} addCard={addCard}
-                                              deleteCard={deleteCard} changeCard={changeCard}
-                                              comments={comments} {...column}/>)
+                columns.columns.map(column => <Column key={column.id} cards={cards}
+                                              editColumnTitle={columns.editColumnTitle}
+                                              comments={comments} column={column}/>)
             }
         </Flex>
     )

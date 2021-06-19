@@ -4,27 +4,39 @@ import ColumnTitle from "./ColumnTitle";
 import AddCard from "../../Card/AddCard/AddCard";
 import {FlexItem} from '../../../ui/index';
 
-interface StandardComponentProps {
-    cards: {id: number, columnId: number, cardTitle: string, cardContent: string, author: string}[]
+interface IProps {
+    cards: {
+        cards: { id: number, columnId: number, cardTitle: string, cardContent: string, author: string }[],
+        addCard: (columnId: number, cardTitle: string, cardContent: string) => void,
+        deleteCard: (id: number) => void,
+        changeCard: (id: number, cardTitle: string, cardContent: string) => void,
+    },
+    comments: {
+        comments: { id: number, cardId: number, message: string, author: string }[]
+        addComment: (id: number, message: string) => void,
+        changeComment: (id: number, message: string) => void,
+        deleteComment: (id: number) => void,
+    },
+    column: { id: number, columnTitle: string },
     editColumnTitle: (id: number, title: string) => void
-    addCard: (columnId: number, cardTitle: string, cardContent: string) => void
-    deleteCard: (id: number) => void
-    changeCard: (id: number, cardTitle: string, cardContent: string) => void
-    id: number
-    columnTitle: string
-    comments: any
 }
 
 
-function Column({cards, editColumnTitle, addCard, deleteCard, changeCard, id, columnTitle, comments}: StandardComponentProps) {
+function Column({cards, comments, column, editColumnTitle}: IProps) {
+    const filteredCards = cards.cards.filter(cards => cards.columnId === column.id)
     return (
         <FlexItem column>
-            <ColumnTitle editColumnTitle={editColumnTitle} columnTitle={columnTitle} id={id}/>
+            <ColumnTitle editColumnTitle={editColumnTitle} columnTitle={column.columnTitle} id={column.id}/>
             {
-                cards.map(card => <Card key={card.id}  deleteCard={deleteCard} changeCard={changeCard} comments={comments} {...card}/>)
+                filteredCards.map(card => <Card key={card.id}
+                                                cardProps={{
+                                                    card,
+                                                    deleteCard: cards.deleteCard,
+                                                    changeCard: cards.changeCard
+                                                }} comments={comments}/>)
             }
             <div>
-                <AddCard addCard={addCard} columnId={id}/>
+                <AddCard addCard={cards.addCard} columnId={column.id}/>
             </div>
         </FlexItem>
     )

@@ -2,22 +2,25 @@ import React from "react";
 import {Flex, Button, Block, TitleH4} from "../../../../ui/index";
 import CommentMessage from "./CommentMessage";
 
-interface StandardComponentProps {
-    changeComment: any
-    deleteComment: any
-    comment: { cardId: number, id: number, author: string, message: string }
+interface IProps {
+    commentProps: {
+        comment: { id: number, cardId: number, message: string, author: string }
+        changeComment: (id: number, message: string) => void,
+        deleteComment: (id: number) => void,
+    }
 }
 
-function CardComment({changeComment, deleteComment, comment}: StandardComponentProps) {
+function CardComment({commentProps}: IProps) {
+    const comment = commentProps.comment
     const id = comment.id
     const message = comment.message
     return (
         <Block>
             <Flex justifyContent={'space-between'}>
                 <TitleH4>{comment.author}</TitleH4>
-                <Button onClick={deleteComment.bind(null, id)} cross>X</Button>
+                <Button onClick={commentProps.deleteComment.bind(null, id)} cross>X</Button>
             </Flex>
-            <CommentMessage changeComment={changeComment} id={id} message={message}/>
+            <CommentMessage changeComment={commentProps.changeComment} id={id} message={message}/>
         </Block>
     )
 }

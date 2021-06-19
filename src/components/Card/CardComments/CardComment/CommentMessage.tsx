@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {TextArea} from "../../../../ui/index";
 
-interface StandardComponentProps {
+interface IProps {
     changeComment: (id: number, message: string) => void
     message: string
     id: number
 }
 
-function CommentMessage({changeComment, message, id}:StandardComponentProps) {
+function CommentMessage({changeComment, message, id}: IProps) {
 
     let [editMode, setEditMode] = useState(false);
     let [mess, setMess] = useState(message);
@@ -17,9 +17,9 @@ function CommentMessage({changeComment, message, id}:StandardComponentProps) {
     }
 
     const deactivateEditMode = () => {
-        if(mess.trim() !== '') {
-        changeComment(id, mess);
-        setEditMode(false);
+        if (mess.trim() !== '') {
+            changeComment(id, mess);
+            setEditMode(false);
         }
     }
 
@@ -28,7 +28,7 @@ function CommentMessage({changeComment, message, id}:StandardComponentProps) {
     }
 
     return (
-        <div >
+        <div>
             {!editMode &&
             <div>
                 <div onClick={activateEditMode}>{mess}</div>
@@ -38,9 +38,9 @@ function CommentMessage({changeComment, message, id}:StandardComponentProps) {
             {editMode &&
             <div>
                 <TextArea onChange={onTitleChange}
-                       autoFocus={true}
-                       value={mess}
-                       onBlur={deactivateEditMode}/>
+                          autoFocus={true}
+                          value={mess}
+                          onBlur={deactivateEditMode}/>
             </div>
             }
         </div>

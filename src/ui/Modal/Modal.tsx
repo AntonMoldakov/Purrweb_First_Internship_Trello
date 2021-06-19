@@ -3,20 +3,15 @@ import {Form} from "react-final-form";
 import './Modal.css'
 import {Flex, Position, Modals, ModalBody, CreateField, TitleH2, Button} from "../index";
 
-interface StandardComponentProps {
-    onSubmit: (values: {
-        name: string
-
-    }) => void
-    setIsOpen: (value: boolean) => void
-    title?: string
-    btnText: string
-    fieldProps: {
-        [key: string]: string
-    }[]
+interface IProps {
+    onSubmit: (values: { title: string, text: string ,  name?: string }) => void,
+    setIsOpen: (value: boolean) => void,
+    title?: string,
+    btnText: string,
+    fieldProps: { type: string, label?: string, value?: string, name: string }[]
 }
 
-function Modal({onSubmit, setIsOpen, title, btnText, fieldProps}: StandardComponentProps) {
+function Modal({onSubmit, setIsOpen, title, btnText, fieldProps}: IProps) {
     return (
         <Modals>
             <ModalBody>

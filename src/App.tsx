@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Columns from "./components/Columns/Columns";
 import Auth from "./components/Auth/Auth";
 import {Wrapper} from "./ui/index";
@@ -23,17 +23,11 @@ function App() {
         {id: 3, columnTitle: 'Testing'},
         {id: 4, columnTitle: 'Done'}
     ])
+    //
+    // useEffect(()=> {
+    //     localStorage.state={cards, comments, columns}
+    // }, [cards, comments, columns])
 
-    useEffect(()=> {
-        localStorage.state={cards, comments, columns}
-    }, [cards, comments, columns])
-
-    function addColumn(columnTitle: string) {
-        setColumns(columns.concat([{
-            id: cards.length + 1,
-            columnTitle,
-        }]))
-    }
 
     function addCard(columnId: number, cardTitle: string, cardContent: string) {
         setCards(cards.concat([{
@@ -73,7 +67,7 @@ function App() {
         setUserName(userName)
     }
 
-    function addComments(id: number, message: string) {
+    function addComment(id: number, message: string) {
         setComments(comments.concat([{
             id: +(new Date()),
             cardId: id,
@@ -99,10 +93,9 @@ function App() {
         <Wrapper>
             <Auth userNameChange={userNameChange}/>
             <h1>TrelloCopy</h1>
-            <Columns cards={cards} columns={columns}
-                     addColumn={addColumn} editColumnTitle={editColumnTitle}
-                     addCard={addCard} deleteCard={deleteCard}
-                     changeCard={changeCard} comments={{addComments, changeComment, deleteComment, comments}}/>
+            <Columns cards={{cards, addCard, deleteCard, changeCard}}
+                     columns={{columns, editColumnTitle}}
+                     comments={{addComment, changeComment, deleteComment, comments}}/>
 
         </Wrapper>
     )

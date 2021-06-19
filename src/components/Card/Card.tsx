@@ -4,21 +4,17 @@ import {TitleH4, Button} from "../../ui/index";
 import CardChange from './CardChange/CardChange';
 
 
-interface StandardComponentProps {
-    deleteCard: any
-    changeCard: any
-    id: number
-    cardTitle: string
-    cardContent: string
-    author: string
+interface IProps {
+    cardProps: {
+        card: { id: number, columnId: number, cardTitle: string, cardContent: string, author: string },
+        deleteCard: (id: number) => void,
+        changeCard: (id: number, cardTitle: string, cardContent: string) => void,
+    },
     comments: {
-        comments: {
-            cardId: number, id: number,
-            author: string, message: string,
-        }[]
-        addComments: (id: number, message: string) => void
-        changeComment: any
-        deleteComment: any
+        comments: { id: number, cardId: number, message: string, author: string }[]
+        addComment: (id: number, message: string) => void,
+        changeComment: (id: number, message: string) => void,
+        deleteComment: (id: number) => void,
     }
 }
 
@@ -29,43 +25,44 @@ function contentLength(content: string): string {
     return content
 }
 
-function Card({deleteCard, changeCard, comments, id, cardTitle, cardContent, author}: StandardComponentProps) {
+function Card({cardProps, comments}: IProps) {
+    const card = cardProps.card
     const [isOpen, setIsOpen] = useState(false)
 
-    const onSubmit = (values: { [key: string]: string }) => {
-        changeCard(id, values.title, values.text)
+    const onSubmit = (values: { title: string, text:string }) => {
+        cardProps.changeCard(card.id, values.title, values.text)
         setIsOpen(false)
     }
-    const SendMessage = (values: { [key: string]: string }) => {
+    const SendComment = (values: { comment: string }) => {
         if (values.comment || values.comment !== '') {
-            comments.addComments(id, values.comment)
+            comments.addComment(card.id, values.comment)
         }
         values.comment = ''
     }
 
     const fieldProps = [
-        {type: 'input', value: cardTitle, name: 'title'},
-        {type: 'textarea', value: cardContent, name: 'text'}
+        {type: 'input', value: card.cardTitle, name: 'title'},
+        {type: 'textarea', value: card.cardContent, name: 'text'}
     ]
     return (
         <div>
             {
                 isOpen && <CardChange onSubmit={onSubmit} setIsOpen={setIsOpen}
                                       btnText={'Save'} fieldProps={fieldProps}
-                                      id={id} comments={comments} SendMessage={SendMessage}/>
+                                      id={card.id} comments={comments} SendComment={SendComment}/>
             }
             <div onClick={() => {
                 setIsOpen(true)
             }} className={styles.card}>
                 <div className={styles.header}>
-                    <Button cross onClick={() => deleteCard(id)}>X</Button>
+                    <Button cross onClick={() => cardProps.deleteCard(card.id)}>X</Button>
                 </div>
-                <TitleH4>{cardTitle}</TitleH4>
+                <TitleH4>{card.cardTitle}</TitleH4>
                 <div>
-                    {contentLength(cardContent)}
+                    {contentLength(card.cardContent)}
                 </div>
                 <div className={styles.author}>
-                    {author}
+                    {card.author}
                 </div>
             </div>
         </div>

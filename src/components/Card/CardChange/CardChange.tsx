@@ -3,28 +3,23 @@ import {Form} from "react-final-form";
 import {Button, TitleH2, Flex, Position, Modals, ModalBody, CreateField} from "../../../ui/index";
 import CardComments from "../CardComments/CardComments";
 
-interface StandardComponentProps {
-    onSubmit: (values: { [key: string]: string }) => void
-    SendMessage: (values: { [key: string]: string }) => void
+interface IProps {
+    onSubmit: (values: { title: string, text:string }) => void
+    SendComment: (values: { comment: string }) => void
     setIsOpen: (value: boolean) => void
     title?: string
     btnText: string
-    fieldProps: {
-        [key: string]: string
-    }[]
+    fieldProps: { type: string, value: string, name: string }[]
     id: number
     comments: {
-        comments: {
-            cardId: number, id: number,
-            author: string, message: string,
-        }[]
-        addComments: (id: number, message: string) => void
-        changeComment: any
-        deleteComment: any
+        comments: { id: number, cardId: number, message: string, author: string }[]
+        addComment: (id: number, message: string) => void,
+        changeComment: (id: number, message: string) => void,
+        deleteComment: (id: number) => void,
     }
 }
 
-function Modal({onSubmit, setIsOpen, fieldProps, id, comments, SendMessage}: StandardComponentProps) {
+function Modal({onSubmit, setIsOpen, fieldProps, id, comments, SendComment}: IProps) {
     return (
         <Modals>
             <ModalBody>
@@ -46,7 +41,7 @@ function Modal({onSubmit, setIsOpen, fieldProps, id, comments, SendMessage}: Sta
                     />
                     <hr/>
                     <Form
-                        onSubmit={SendMessage}
+                        onSubmit={SendComment}
                         render={({handleSubmit}) => (
                             <form onSubmit={handleSubmit}>
                                 <TitleH2>Comments</TitleH2>
@@ -61,7 +56,7 @@ function Modal({onSubmit, setIsOpen, fieldProps, id, comments, SendMessage}: Sta
                     />
 
                     <div>
-                        <CardComments {...comments} id={id}/>
+                        <CardComments comments={comments} id={id}/>
                     </div>
                 </Position>
             </ModalBody>
