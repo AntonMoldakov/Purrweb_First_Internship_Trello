@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import {TitleH4, Input} from "../../../ui/index";
 
 interface StandardComponentProps {
-    editColumnTitle: any
-    columnTitle: string
+    editColumnTitle: (id: number, title: string) => void,
+    columnTitle: string,
     id: number
 }
 
@@ -29,7 +29,7 @@ function ColumnTitle({editColumnTitle, columnTitle, id}:StandardComponentProps) 
         <div >
             {!editMode &&
             <div>
-                <TitleH4 onClick={activateEditMode} cursor={'pointer'} >{columnTitle || "Column title"}</TitleH4>
+                <TitleH4 onClick={activateEditMode} $cursor={'pointer'} >{columnTitle || "Column title"}</TitleH4>
             </div>
             }
 

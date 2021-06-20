@@ -1,8 +1,14 @@
-import React from "react";
-import styled, {css} from "styled-components";
+import React, {HTMLAttributes, ReactNode} from "react";
+import styled from "styled-components";
 
-const StyledFlexItem = styled.div<{ [key: string]: boolean }>`
-    ${({column}) => column && css`
+export interface FlexItemProps extends HTMLAttributes<HTMLElement> {
+    children: ReactNode,
+    $column?: boolean
+}
+
+
+const StyledFlexItem = styled.div<FlexItemProps>`
+    ${({$column}) => $column && `
         margin: 0 .5rem;
         width: 300px;
         border-radius: 5px;
@@ -10,8 +16,9 @@ const StyledFlexItem = styled.div<{ [key: string]: boolean }>`
     `}
 `
 
-const FlexItem = (props: any) => {
-    return <StyledFlexItem {...props}/>
+const FlexItem = (props: FlexItemProps) => {
+    const {$column, children} = props
+    return <StyledFlexItem $column={$column}>{children}</StyledFlexItem>
 }
 
 export default FlexItem

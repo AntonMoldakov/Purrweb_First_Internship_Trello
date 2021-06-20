@@ -15,19 +15,19 @@ function AddCardBody({onSubmit} : {onSubmit: (values: { title: string, text: str
             onSubmit={onSubmit}
             render={({handleSubmit}) => (
                 <form onSubmit={handleSubmit}>
-                    <Flex justifyContent={'space-between'} margin={'0 0 .5rem'}>
-                        <Label margin={'0 .5rem 0 0'}>Title</Label>
+                    <Flex $justifyContent={'space-between'} $margin={'0 0 .5rem'}>
+                        <Label $margin={'0 .5rem 0 0'}>Title</Label>
                         <Field className={'form__field'} name={'title'}
                                component={'input'} placeholder={'title'}
                                validate={required}/>
                     </Flex>
-                    <Flex justifyContent={'space-between'} margin={'0 0 0.5rem'}>
-                        <Label margin={'0 .5rem 0 0'}>Text</Label>
+                    <Flex $justifyContent={'space-between'} $margin={'0 0 0.5rem'}>
+                        <Label $margin={'0 .5rem 0 0'}>Text</Label>
                         <Field className={'form__field textarea'} name={'text'} component={'textarea'}
                                placeholder={'text'}/>
                     </Flex>
 
-                    <Button sub type="submit">Create</Button>
+                    <Button $sub type="submit">Create</Button>
                 </form>
             )}/>
     )

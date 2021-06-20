@@ -14,7 +14,6 @@ const required = (v: string) => {
 interface IProps {
     onSubmit: (values: { title: string, text: string }) => void,
     SendComment: (values: { comment: string }) => void,
-    id: number,
     cardTitle: string,
     cardContent: string,
     comments: {
@@ -25,23 +24,23 @@ interface IProps {
     }
 }
 
-function Modal({onSubmit, id, comments, SendComment, cardTitle, cardContent}: IProps) {
+function CardChange({onSubmit, comments, SendComment, cardTitle, cardContent}: IProps) {
     return (
         <div>
             <Form
                 onSubmit={onSubmit}
                 render={({handleSubmit}) => (
                     <form onSubmit={handleSubmit}>
-                        <Flex justifyContent={'space-between'} margin={'0 0 .5rem'}>
+                        <Flex $justifyContent={'space-between'} $margin={'0 0 .5rem'}>
                             <Field className={'form__field'} name={'title'}
                                    component={'input'} placeholder={'title'}
                                    defaultValue={cardTitle} validate={required}/>
                         </Flex>
-                        <Flex justifyContent={'space-between'} margin={'0 0 0.5rem'}>
+                        <Flex $justifyContent={'space-between'} $margin={'0 0 0.5rem'}>
                             <Field className={'form__field textarea'} name={'text'} component={'textarea'}
                                    placeholder={'text'} defaultValue={cardContent}/>
                         </Flex>
-                        <Button sub type="submit">Save</Button>
+                        <Button $sub type="submit">Save</Button>
                     </form>
                 )}
             />
@@ -51,22 +50,22 @@ function Modal({onSubmit, id, comments, SendComment, cardTitle, cardContent}: IP
                 render={({handleSubmit}) => (
                     <form onSubmit={handleSubmit}>
                         <TitleH2>Comments</TitleH2>
-                        <Flex justifyContent={'space-between'} alignItems={'flex-end'}>
-                            <Flex justifyContent={'space-between'} margin={'0 0 0.5rem'}>
+                        <Flex $justifyContent={'space-between'} $alignItems={'flex-end'}>
+                            <Flex $justifyContent={'space-between'} $margin={'0 0 0.5rem'}>
                                 <Field className={'form__field textarea'} name={'comment'}
                                        component={'textarea'} placeholder={'comment'}/>
                             </Flex>
-                            <Button sub type="submit">Send</Button>
+                            <Button $sub type="submit">Send</Button>
                         </Flex>
                     </form>
                 )}
             />
 
             <div>
-                <CardComments comments={comments} id={id}/>
+                <CardComments comments={comments}/>
             </div>
         </div>
     )
 }
 
-export default Modal
+export default CardChange

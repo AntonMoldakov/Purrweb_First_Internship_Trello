@@ -1,7 +1,7 @@
-import React from "react";
+import React, {ReactNode} from "react";
 import styled from "styled-components";
 
-const StyledModalBody = styled.div`
+const StyledModalWindow = styled.div`
    text-align: center;
        width: 400px;
        height: fit-content;
@@ -12,11 +12,11 @@ const StyledModalBody = styled.div`
 
 `
 
-const ModalBody = (props: any) => {
-    return <StyledModalBody {...props}/>
+const ModalWindow = ({children}: { children: ReactNode }) => {
+    return <StyledModalWindow>{children}</StyledModalWindow>
 }
 
-export default ModalBody
+export default ModalWindow
 
 
 

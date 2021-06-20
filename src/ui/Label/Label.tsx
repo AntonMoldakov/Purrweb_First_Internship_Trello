@@ -1,19 +1,20 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React, {HTMLAttributes, ReactNode} from "react";
+import styled from "styled-components";
 
-interface InterfaceStyles {
-    [key: string]: string
+export interface LabelProps extends HTMLAttributes<HTMLElement> {
+    children: ReactNode,
+    $padding?: string,
+    $margin?: string
 }
 
-const StyledLabel = styled.div<InterfaceStyles>`
-
-    margin: ${({margin}: InterfaceStyles) => margin || 0};
-    padding: ${({padding}: InterfaceStyles) => padding || 0};
-    
+const StyledLabel = styled.div<LabelProps>`
+    margin: ${({$margin}) => $margin || 0};
+    padding: ${({$padding}) => $padding || 0};
 `
 
-const Label = (props: any) => {
-    return <StyledLabel {...props}/>
+const Label = (props: LabelProps) => {
+    const {children, $margin, $padding} = props
+    return <StyledLabel $margin={$margin} $padding={$padding}>{children}</StyledLabel>
 }
 
 export default Label

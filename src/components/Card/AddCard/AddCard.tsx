@@ -18,7 +18,7 @@ function AddCard({addCard, columnId}: IProps) {
 
     return (
         <React.Fragment>
-            <Button addCard onClick={() => setIsOpen(true)}>Add card</Button>
+            <Button $addCard onClick={() => setIsOpen(true)}>Add card</Button>
             {isOpen && <Modal setIsOpen={setIsOpen} title={'Create card'}
                               children={<AddCardBody onSubmit={onSubmit}/>}
             />}

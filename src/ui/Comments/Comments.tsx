@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactNode} from "react";
 import styled from "styled-components";
 
 const StyledComments = styled.div`
@@ -6,8 +6,8 @@ const StyledComments = styled.div`
     max-height: 30vh;
 `
 
-const Comments = (props: any) => {
-    return <StyledComments {...props}/>
+const Comments = ({children}: { children: ReactNode }) => {
+    return <StyledComments>{children}</StyledComments>
 }
 
 export default Comments

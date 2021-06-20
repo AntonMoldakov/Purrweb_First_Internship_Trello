@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactNode} from "react";
 import styled from "styled-components";
 
 const StyledModals = styled.div`
@@ -15,8 +15,8 @@ const StyledModals = styled.div`
     
 `
 
-const ModalExternal = (props: any) => {
-    return <StyledModals {...props}/>
+const ModalExternal = ({children}: { children: ReactNode }) => {
+    return <StyledModals>{children}</StyledModals>
 }
 
 export default ModalExternal

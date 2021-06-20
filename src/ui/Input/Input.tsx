@@ -1,5 +1,13 @@
-import React from "react";
-import styled, {css} from "styled-components";
+import React, { InputHTMLAttributes} from "react";
+import { ChangeEvent } from "react";
+import styled from "styled-components";
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    autoFocus?: boolean;
+    value: string;
+    onBlur?: () => void;
+}
 
 const StyledInput = styled.input`
     margin-bottom: .5rem;
@@ -8,9 +16,9 @@ const StyledInput = styled.input`
     font-size: 16px;
 `
 
-const Input = (props: any) => {
-
-    return <StyledInput {...props}/>
+const Input = (props: InputProps) => {
+    const {onChange, autoFocus, onBlur, value} = props
+    return <StyledInput onChange={onChange} autoFocus={autoFocus} onBlur={onBlur} value={value}/>
 }
 
 

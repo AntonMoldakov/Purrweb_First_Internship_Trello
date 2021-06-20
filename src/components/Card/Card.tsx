@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import styles from './Card.module.css'
-import {TitleH4, Button, Modal} from "../../ui/index";
+import {TitleH4, Button, Modal, Flex} from "../../ui/index";
 import CardChange from './CardChange/CardChange';
-import AuthBody from "../Auth/AuthBody";
 
 
 interface IProps {
@@ -29,6 +28,7 @@ function contentLength(content: string): string {
 function Card({cardProps, comments}: IProps) {
     const card = cardProps.card
     const [isOpen, setIsOpen] = useState(false)
+    const filteredComments = comments.comments.filter(comment => comment.cardId === card.id)
 
     const onSubmit = (values: { title: string, text: string }) => {
         cardProps.changeCard(card.id, values.title, values.text)
@@ -43,24 +43,33 @@ function Card({cardProps, comments}: IProps) {
         <div>
             {
                 isOpen && <Modal children={<CardChange
-                    onSubmit={onSubmit} id={card.id}
+                    onSubmit={onSubmit}
                     cardTitle={card.cardTitle} cardContent={card.cardContent}
-                    SendComment={SendComment} comments={comments}/>}
-                                 setIsOpen={setIsOpen} title={''}/>
+                    SendComment={SendComment} comments={{
+                    comments: filteredComments,
+                    addComment: comments.addComment,
+                    changeComment: comments.changeComment,
+                    deleteComment: comments.deleteComment
+                }}/>} setIsOpen={setIsOpen} title={''}/>
             }
             <div onClick={() => {
                 setIsOpen(true)
             }} className={styles.card}>
                 <div className={styles.header}>
-                    <Button cross onClick={() => cardProps.deleteCard(card.id)}>X</Button>
+                    <Button $cross onClick={() => cardProps.deleteCard(card.id)}>X</Button>
                 </div>
                 <TitleH4>{card.cardTitle}</TitleH4>
                 <div>
                     {contentLength(card.cardContent)}
                 </div>
-                <div className={styles.author}>
-                    {card.author}
-                </div>
+                <Flex $justifyContent={'space-between'}>
+                    <div className={styles.footer}>
+                        {card.author}
+                    </div>
+                    <div className={styles.footer}>
+                        comments: {filteredComments.length}
+                    </div>
+                </Flex>
             </div>
         </div>
 

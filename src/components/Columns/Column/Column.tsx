@@ -2,7 +2,7 @@ import React from 'react'
 import Card from "../../Card/Card";
 import ColumnTitle from "./ColumnTitle";
 import AddCard from "../../Card/AddCard/AddCard";
-import {FlexItem, Modal} from '../../../ui/index';
+import {FlexItem} from '../../../ui/index';
 
 interface IProps {
     cards: {
@@ -25,7 +25,7 @@ interface IProps {
 function Column({cards, comments, column, editColumnTitle}: IProps) {
     const filteredCards = cards.cards.filter(cards => cards.columnId === column.id)
     return (
-        <FlexItem column>
+        <FlexItem $column>
             <ColumnTitle editColumnTitle={editColumnTitle} columnTitle={column.columnTitle} id={column.id}/>
             {
                 filteredCards.map(card => <Card key={card.id}

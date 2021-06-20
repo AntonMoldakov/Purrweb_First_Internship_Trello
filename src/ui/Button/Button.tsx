@@ -1,14 +1,25 @@
-import React from "react";
-import styled, {css} from "styled-components";
+import React, {ButtonHTMLAttributes, ReactNode} from "react";
+import styled from "styled-components";
 
-const StyledButton = styled.button<{ [key: string]: boolean }>`
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    children: ReactNode,
+    type?: "submit" | "reset" | "button",
+    $sub?: boolean,
+    $addCard?: boolean,
+    $cross?: boolean,
+    onClick?: () => void
+
+}
+
+
+const StyledButton = styled.button<ButtonProps>`
     &:active && focus {
     outline: none;
     }
     &:-moz-focus-inner {
     border: 0;
     }
-    ${({sub}) => sub && css`
+    ${({$sub}) => $sub && `
         margin: .5rem 0;
          padding: .5rem;
          background: white;
@@ -21,7 +32,7 @@ const StyledButton = styled.button<{ [key: string]: boolean }>`
             background: #b4b4b4;
          }
     `}
-    ${({addCard}) => addCard && css`
+    ${({$addCard}) => $addCard && `
         width: 100%;
         color: #ccc;
         background-color: #333336;
@@ -34,7 +45,7 @@ const StyledButton = styled.button<{ [key: string]: boolean }>`
             background-color: #47474A;
          }
     `}
-    ${({cross}) => cross && css`
+    ${({$cross}) => $cross && `
         color: white;
         background: none;
         border: none;
@@ -42,9 +53,15 @@ const StyledButton = styled.button<{ [key: string]: boolean }>`
     `}
 `
 
-const Button = (props: any) => {
+const Button = (props: ButtonProps) => {
+    const {onClick, type, children, $cross, $addCard, $sub} = props
 
-    return <StyledButton {...props}/>
+    return <StyledButton onClick={onClick} type={type}
+                         $sub={$sub} $cross={$cross}
+                         $addCard={$addCard}>
+        {children}
+    </StyledButton>
+
 }
 
 

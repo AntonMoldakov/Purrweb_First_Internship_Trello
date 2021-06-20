@@ -15,13 +15,13 @@ function AuthBody({onSubmit} : {onSubmit: (values: { name: string }) => void}) {
             onSubmit={onSubmit}
             render={({handleSubmit}) => (
                 <form onSubmit={handleSubmit}>
-                    <Flex justifyContent={'space-between'} margin={'0 0 .5rem'}>
-                        <Label margin={'0 .5rem 0 0'}>Your name</Label>
+                    <Flex $justifyContent={'space-between'} $margin={'0 0 .5rem'}>
+                        <Label $margin={'0 .5rem 0 0'}>Your name</Label>
                         <Field className={'form__field'} name={'name'}
                                component={'input'} placeholder={'name'}
                                validate={required}/>
                     </Flex>
-                    <Button sub type="submit">Enter</Button>
+                    <Button $sub type="submit">Enter</Button>
                 </form>
             )}/>
     )

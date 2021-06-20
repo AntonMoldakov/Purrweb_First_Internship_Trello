@@ -9,21 +9,18 @@ interface IProps {
         changeComment: (id: number, message: string) => void,
         deleteComment: (id: number) => void,
     }
-    id: number
 }
 
-function CardComments({comments, id}: IProps) {
+function CardComments({comments}: IProps) {
     return (
         <Comments>
             {
                 comments.comments.map(comment => {
-                    if (comment.cardId === id) {
-                        return <CardComment key={comment.id} commentProps={{
-                            comment,
-                            changeComment: comments.changeComment,
-                            deleteComment: comments.deleteComment
-                        }}/>
-                    }
+                    return <CardComment key={comment.id} commentProps={{
+                        comment,
+                        changeComment: comments.changeComment,
+                        deleteComment: comments.deleteComment
+                    }}/>
                 })
             }
         </Comments>

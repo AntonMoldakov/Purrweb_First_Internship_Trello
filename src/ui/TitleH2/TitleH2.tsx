@@ -1,14 +1,14 @@
-import React from "react";
-import styled, {css} from "styled-components";
+import React, {ReactNode} from "react";
+import styled from "styled-components";
 
-const StyledTitle = styled.h2<{ [key: string]: boolean }>`
+const StyledTitle = styled.h2`
     margin: .5rem 0;
     color: white
 `
 
-const TitleH2 = (props: any) => {
+const TitleH2 = ({children}: {children: ReactNode}) => {
 
-    return <StyledTitle {...props}/>
+    return <StyledTitle>{children}</StyledTitle>
 }
 
 

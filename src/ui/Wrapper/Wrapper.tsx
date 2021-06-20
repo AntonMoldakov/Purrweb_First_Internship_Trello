@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactNode} from "react";
 import styled from "styled-components";
 
 const StyledWrapper = styled.div`
@@ -12,8 +12,8 @@ const StyledWrapper = styled.div`
     }
 `
 
-const Wrapper = (props:any) => {
-    return <StyledWrapper {...props}/>
+const Wrapper = ({children}: {children: ReactNode}) => {
+    return <StyledWrapper>{children}</StyledWrapper>
 }
 
 export default Wrapper

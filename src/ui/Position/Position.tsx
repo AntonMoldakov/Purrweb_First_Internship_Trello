@@ -1,18 +1,21 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React, {HTMLAttributes, ReactNode} from "react";
+import styled from "styled-components";
 
-interface InterfaceStyles {
-    [key: string]: string
+export interface PositionProps extends HTMLAttributes<HTMLElement> {
+    children: ReactNode,
+    $padding?: string,
+    $margin?: string
 }
 
-const StyledPosition = styled.div<InterfaceStyles>`
-    margin: ${({margin}: InterfaceStyles) => margin || 0};
-    padding: ${({padding}: InterfaceStyles) => padding || 0};
+const StyledPosition = styled.div<PositionProps>`
+    margin: ${({$margin}) => $margin || 0};
+    padding: ${({$padding}) => $padding || 0};
     
 `
 
-const Position = (props: any) => {
-    return <StyledPosition {...props}/>
+const Position = (props: PositionProps) => {
+    const {children, $margin, $padding} = props
+    return <StyledPosition $margin={$margin} $padding={$padding}>{children}</StyledPosition>
 }
 
 export default Position
