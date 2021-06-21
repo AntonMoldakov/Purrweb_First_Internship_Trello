@@ -18,7 +18,7 @@ interface IProps {
         comments: { id: number, cardId: number, message: string, author: string }[]
         addComment: (id: number, message: string) => void,
         changeComment: (id: number, message: string) => void,
-        deleteComment: (id: number) => void,
+        deleteComment: (id: number) => void
     }
 }
 

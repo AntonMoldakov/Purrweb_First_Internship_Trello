@@ -1,21 +1,17 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Columns from "./components/Columns/Columns";
 import Auth from "./components/Auth/Auth";
 import {Wrapper} from "./ui/index";
 
-function App() {
 
+
+function App() {
     const [userName, setUserName] = useState('Guest')
     const [cards, setCards] = useState([
-        {id: 1, columnId: 1, cardTitle: 'Card 1', cardContent: 'fdsfsd fsd fsd fsd fsd fsdff', author: 'Anton'},
-        {id: 2, columnId: 1, cardTitle: 'Card 1', cardContent: 'fdsfsd fsfsd fsdff', author: 'Anton'},
-        {id: 3, columnId: 2, cardTitle: 'Card 2', cardContent: 'fdsfsd fsd dasdfsd fsd fsd fsdff', author: 'Gleb'},
-        {id: 4, columnId: 3, cardTitle: 'Card 3', cardContent: 'fdsffsd fsd fsd fsdff', author: 'Arthur'}
+        {id: 80, columnId: 0, cardTitle: '', cardContent: '', author: ''}
     ])
     const [comments, setComments] = useState([
-        {id: 124, cardId: 1, message: 'hhahahaahhah', author: 'Anton'},
-        {id: 12234, cardId: 1, message: 'hhh ok', author: 'Gleb'},
-        {id: 14, cardId: 2, message: 'hhahah  ffffhah', author: 'Beb'}
+        {id: 80, cardId: 80, message: '', author: ''}
     ])
     const [columns, setColumns] = useState([
         {id: 1, columnTitle: 'TODO'},
@@ -23,43 +19,69 @@ function App() {
         {id: 3, columnTitle: 'Testing'},
         {id: 4, columnTitle: 'Done'}
     ])
-    //
-    // useEffect(()=> {
-    //     localStorage.state={cards, comments, columns}
-    // }, [cards, comments, columns])
+
+    useEffect(() => {
+        let comments = JSON.parse(localStorage.getItem("comments") as string)
+        if (comments) {
+            setComments(comments)
+        }
+
+        let columns = JSON.parse(localStorage.getItem("columns") as string)
+        if (!columns || columns.length !== 4) {
+            columns = [
+                {id: 1, columnTitle: 'TODO'},
+                {id: 2, columnTitle: 'In Progress'},
+                {id: 3, columnTitle: 'Testing'},
+                {id: 4, columnTitle: 'Done'}
+            ]
+        }
+        setColumns(columns)
+        let cards = JSON.parse(localStorage.getItem("cards") as string)
+        if (cards) {
+            setCards(cards)
+        }
+    }, [])
 
 
     function addCard(columnId: number, cardTitle: string, cardContent: string) {
-        setCards(cards.concat([{
+        let newCards = cards.concat([{
             id: +(new Date()),
             columnId,
             cardTitle,
             cardContent,
             author: userName
-        }]))
+        }])
+        setCards(newCards)
+        localStorage.setItem("cards", JSON.stringify(newCards))
     }
 
     function changeCard(id: number, cardTitle: string, cardContent: string) {
-        setCards(cards.map(card => {
-            if(card.id === id) {
+        let newCards = cards.map(card => {
+            if (card.id === id) {
                 card.cardTitle = cardTitle
                 card.cardContent = cardContent
             }
             return card
-        }))
+        })
+        setCards(newCards)
+        localStorage.setItem("cards", JSON.stringify(newCards))
     }
 
     function deleteCard(id: number) {
-        setCards(cards.filter(card => card.id !== id))
+        let newCards = cards.filter(card => card.id !== id)
+        setCards(newCards)
+        localStorage.setItem("cards", JSON.stringify(newCards))
     }
 
     function editColumnTitle(id: number, title: string) {
-        setColumns(columns.map(column => {
+        let newColumns = columns.map(column => {
             if (column.id === id) {
                 column.columnTitle = title
             }
             return column
-        }))
+        })
+        setColumns(newColumns)
+        localStorage.setItem("columns", JSON.stringify(newColumns))
     }
 
 
@@ -68,25 +90,31 @@ function App() {
     }
 
     function addComment(id: number, message: string) {
-        setComments([{
+        let newComments = [{
             id: +(new Date()),
             cardId: id,
             message,
             author: userName
-        }].concat(comments))
+        }].concat(comments)
+        setComments(newComments)
+        localStorage.setItem("comments", JSON.stringify(newComments))
     }
 
     function changeComment(id: number, message: string) {
-        setComments(comments.map(comment => {
-            if(comment.id === id) {
+        let newComments = comments.map(comment => {
+            if (comment.id === id) {
                 comment.message = message
             }
             return comment
-        }))
+        })
+        setComments(newComments)
+        localStorage.setItem("comments", JSON.stringify(newComments))
     }
 
     function deleteComment(id: number) {
-        setComments(comments.filter(comment => comment.id !== id))
+        let newComments = comments.filter(comment => comment.id !== id)
+        setComments(newComments)
+        localStorage.setItem("comments", JSON.stringify(newComments))
     }
 
     return (
