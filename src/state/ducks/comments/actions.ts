@@ -1,28 +1,20 @@
+import {IComment} from "interface";
 import type from "./types";
 
-interface IComment {
-    id: number,
-    cardId: number,
-    message: string,
-    author: string
-}
-
-
 const addComment = (comment: IComment) => ({
-    type: type.ADD,
-    comment
+	type: type.ADD,
+	comment
 })
 
 const deleteComment = (id: number) => ({
-    type: type.DELETE,
-    id
+	type: type.DELETE,
+	id
 })
 
-const changeComment = (comment: IComment) => ({
-    type: type.CHANGE,
-    comment
+const changeComment = (comment: { id: number, message: string }) => ({
+	type: type.CHANGE,
+	comment
 })
 
-
-// @ts-ignore
-export default {addComment, deleteComment, changeComment};
+const actions = {addComment, deleteComment, changeComment}
+export default actions

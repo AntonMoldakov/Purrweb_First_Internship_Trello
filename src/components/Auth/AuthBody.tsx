@@ -1,6 +1,6 @@
 import React from "react";
 import {Field, Form} from "react-final-form";
-import {Button, Flex, Label} from "../../ui";
+import {Button, Flex, Label} from "ui";
 
 const required = (v: string) => {
     if (!v || v.trim() === '') {

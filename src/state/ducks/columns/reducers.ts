@@ -1,16 +1,13 @@
 import type from "./types";
-
-interface IState {
-	columns: { id: number, columnTitle: string }[]
-}
+import {IColumn} from "interface";
 
 interface IActions {
 	type: string,
-	id?: number,
-	column?: { id: number, columnTitle: string }
+	id: number,
+	column: IColumn
 }
 
-const initialState: IState = {
+const initialState = {
 	columns: [{id: 1, columnTitle: 'TODO'},
 		{id: 2, columnTitle: 'In Progress'},
 		{id: 3, columnTitle: 'Testing'},
@@ -21,8 +18,8 @@ const columnsReducer = (state = initialState, action: IActions) => {
 	switch (action.type) {
 		case type.CHANGE:
 			return {
-				...state, comments: state.columns.map(column => {// @ts-ignore
-					if (column.id === action.column.id) {// @ts-ignore
+				...state, comments: state.columns.map(column => {
+					if (column.id === action.column.id) {
 						column.columnTitle = action.column.columnTitle
 					}
 					return column
@@ -33,6 +30,4 @@ const columnsReducer = (state = initialState, action: IActions) => {
 	}
 }
 
-
-// @ts-ignore
 export default columnsReducer;

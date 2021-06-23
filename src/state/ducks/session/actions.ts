@@ -2,7 +2,8 @@ import type from "./types";
 
 const Auth = (userName: string) => ({
 	type: type.AUTH,
-	userName: userName? userName: 'Guest'
+	userName: userName ? userName : 'Guest'
 })
-// @ts-ignore
-export default {Auth};
+
+const actions = {Auth}
+export default actions

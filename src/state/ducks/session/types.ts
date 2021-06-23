@@ -1,3 +1,4 @@
 const AUTH = "session/AUTH"
 
-export default {AUTH}
+const types = {AUTH}
+export default types

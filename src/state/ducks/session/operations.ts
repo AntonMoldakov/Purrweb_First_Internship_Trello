@@ -1,7 +1,10 @@
 import actions from "./actions";
+import {Dispatch} from "redux";
 
-const Auth = (userName: string) => (dispatch: any) => {
+const Auth = (userName: string) => (dispatch: Dispatch) => {
 	dispatch(actions.Auth(userName))
 }
 
-export default {Auth};
+const operations = {Auth}
+
+export default operations

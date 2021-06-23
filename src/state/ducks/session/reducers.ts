@@ -18,5 +18,4 @@ const columnsReducer = (state = initialState, action: IActions) => {
 	}
 }
 
-// @ts-ignore
 export default columnsReducer;

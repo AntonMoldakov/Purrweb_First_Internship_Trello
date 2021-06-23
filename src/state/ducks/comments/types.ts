@@ -2,8 +2,5 @@ const ADD = "comments/ADD"
 const DELETE = "comments/DELETE"
 const CHANGE = "comments/CHANGE"
 
-export default {
-    ADD,
-    DELETE,
-    CHANGE
-}
+const types = {ADD, DELETE, CHANGE}
+export default types

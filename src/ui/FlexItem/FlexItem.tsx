@@ -6,6 +6,12 @@ export interface FlexItemProps extends HTMLAttributes<HTMLElement> {
     $column?: boolean
 }
 
+const FlexItem = (props: FlexItemProps) => {
+    const {$column, children} = props
+    return <StyledFlexItem $column={$column}>{children}</StyledFlexItem>
+}
+
+export default FlexItem
 
 const StyledFlexItem = styled.div<FlexItemProps>`
     ${({$column}) => $column && `
@@ -15,14 +21,6 @@ const StyledFlexItem = styled.div<FlexItemProps>`
         text-align: center;
     `}
 `
-
-const FlexItem = (props: FlexItemProps) => {
-    const {$column, children} = props
-    return <StyledFlexItem $column={$column}>{children}</StyledFlexItem>
-}
-
-export default FlexItem
-
 
 
 

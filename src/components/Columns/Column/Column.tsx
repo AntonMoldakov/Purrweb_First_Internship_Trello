@@ -3,22 +3,27 @@ import Card from "../../Card/Card";
 import ColumnTitle from "./ColumnTitle";
 import AddCard from "../../Card/AddCard/AddCard";
 import {FlexItem} from 'ui';
+import {
+	IAddCard, IAddComment, ICard,
+	IChangeCard, IChangeComment, IColumn,
+	IComment, IDeleteCard, IDeleteComment, IEditColumnTitle
+} from "interface";
 
 interface IProps {
 	cards: {
-		cards: { id: number, columnId: number, cardTitle: string, cardContent: string, author: string }[],
-		addCard: (columnId: number, cardTitle: string, cardContent: string) => void,
-		deleteCard: (id: number) => void,
-		changeCard: (id: number, cardTitle: string, cardContent: string) => void,
+		cards: ICard[],
+		addCard: IAddCard,
+		deleteCard: IDeleteCard,
+		changeCard: IChangeCard,
 	},
 	comments: {
-		comments: { id: number, cardId: number, message: string, author: string }[]
-		addComment: (id: number, message: string) => void,
-		changeComment: (id: number, message: string) => void,
-		deleteComment: (id: number) => void,
+		comments: IComment[]
+		addComment: IAddComment,
+		changeComment: IChangeComment,
+		deleteComment: IDeleteComment,
 	},
-	column: { id: number, columnTitle: string },
-	editColumnTitle: (id: number, title: string) => void
+	column: IColumn,
+	editColumnTitle: IEditColumnTitle
 }
 
 

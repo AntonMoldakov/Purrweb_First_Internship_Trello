@@ -10,6 +10,14 @@ export interface FlexProps extends HTMLAttributes<HTMLElement> {
 
 }
 
+const Flex = (props: FlexProps) => {
+    const {children, $justifyContent, $alignItems, $margin, $padding} = props
+    return <StyledFlex $justifyContent={$justifyContent} $alignItems={$alignItems}
+                       $margin={$margin} $padding={$padding}>{children}</StyledFlex>
+}
+
+export default Flex
+
 const StyledFlex = styled.div<FlexProps>`
     display: flex;
     width: 100%;
@@ -19,15 +27,6 @@ const StyledFlex = styled.div<FlexProps>`
     padding: ${({$padding}) => $padding || 0};
     
 `
-
-const Flex = (props: FlexProps) => {
-    const {children, $justifyContent, $alignItems, $margin, $padding} = props
-    return <StyledFlex $justifyContent={$justifyContent} $alignItems={$alignItems}
-                       $margin={$margin} $padding={$padding}>{children}</StyledFlex>
-}
-
-export default Flex
-
 
 
 

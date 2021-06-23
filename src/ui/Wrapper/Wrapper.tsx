@@ -1,6 +1,12 @@
 import React, {ReactNode} from "react";
 import styled from "styled-components";
 
+const Wrapper = ({children}: { children: ReactNode }) => {
+	return <StyledWrapper>{children}</StyledWrapper>
+}
+
+export default Wrapper
+
 const StyledWrapper = styled.div`
     padding-top: 1rem;
     margin: 0 auto;
@@ -11,9 +17,3 @@ const StyledWrapper = styled.div`
     margin-bottom: 1rem
     }
 `
-
-const Wrapper = ({children}: {children: ReactNode}) => {
-    return <StyledWrapper>{children}</StyledWrapper>
-}
-
-export default Wrapper

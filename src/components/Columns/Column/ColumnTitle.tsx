@@ -1,13 +1,14 @@
 import React, {useState} from "react";
-import {TitleH4, Input} from "../../../ui/index";
+import {TitleH4, Input} from "ui";
+import {IEditColumnTitle} from "interface";
 
-interface StandardComponentProps {
-    editColumnTitle: (id: number, title: string) => void,
+interface IProps {
+    editColumnTitle: IEditColumnTitle,
     columnTitle: string,
     id: number
 }
 
-function ColumnTitle({editColumnTitle, columnTitle, id}:StandardComponentProps) {
+function ColumnTitle({editColumnTitle, columnTitle, id}:IProps) {
 
     let [editMode, setEditMode] = useState(false);
     let [title, setTitle] = useState(columnTitle);

@@ -1,29 +1,20 @@
+import {ICard} from "interface";
 import type from "./types";
 
-interface ICard {
-    id: number,
-    columnId: number,
-    cardTitle: string,
-    cardContent: string,
-    author: string
-}
-
-
 const addCard = (card: ICard) => ({
-    type: type.ADD,
-    card
+	type: type.ADD,
+	card
 })
 
 const deleteCard = (id: number) => ({
-    type: type.DELETE,
-    id
+	type: type.DELETE,
+	id
 })
 
-const changeCard = (card: ICard) => ({
-    type: type.CHANGE,
-    card
+const changeCard = (card: { id: number, cardTitle: string, cardContent: string }) => ({
+	type: type.CHANGE,
+	card
 })
 
-
-// @ts-ignore
-export default {addCard, deleteCard, changeCard};
+const actions = {addCard, deleteCard, changeCard}
+export default actions

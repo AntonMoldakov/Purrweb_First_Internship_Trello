@@ -1,6 +1,12 @@
 import React, {ReactNode} from "react";
 import styled from "styled-components";
 
+const ModalWindow = ({children}: { children: ReactNode }) => {
+    return <StyledModalWindow>{children}</StyledModalWindow>
+}
+
+export default ModalWindow
+
 const StyledModalWindow = styled.div`
    text-align: center;
        width: 400px;
@@ -11,13 +17,6 @@ const StyledModalWindow = styled.div`
        overflow: auto;
 
 `
-
-const ModalWindow = ({children}: { children: ReactNode }) => {
-    return <StyledModalWindow>{children}</StyledModalWindow>
-}
-
-export default ModalWindow
-
 
 
 

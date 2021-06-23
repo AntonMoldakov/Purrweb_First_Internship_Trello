@@ -1,3 +1,4 @@
 const CHANGE = "columns/CHANGE"
 
-export default {CHANGE}
+const types = {CHANGE}
+export default types

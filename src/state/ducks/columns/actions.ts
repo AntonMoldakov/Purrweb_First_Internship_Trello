@@ -1,16 +1,10 @@
+import {IColumn} from "interface";
 import type from "./types";
 
-interface IColumn {
-    id: number,
-    columnTitle: number
-}
-
-
 const changeColumn = (column: IColumn) => ({
-    type: type.CHANGE,
-    column
+	type: type.CHANGE,
+	column
 })
 
-
-// @ts-ignore
-export default {changeColumn};
+const actions = {changeColumn}
+export default actions

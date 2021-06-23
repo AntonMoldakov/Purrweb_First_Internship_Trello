@@ -1,6 +1,7 @@
 import actions from "./actions";
+import {Dispatch} from "redux";
 
-const AddComment = (cardId: number, message: string) => (dispatch: any) => {
+const AddComment = (cardId: number, message: string) => (dispatch: Dispatch) => {
 	let comment = {
 		id: +(new Date()),
 		cardId,
@@ -12,21 +13,17 @@ const AddComment = (cardId: number, message: string) => (dispatch: any) => {
 
 	dispatch(action)
 }
-const DeleteComment = (id: number) => (dispatch: any) => {
+const DeleteComment = (id: number) => (dispatch: Dispatch) => {
 	dispatch(actions.deleteComment(id))
 }
-const ChangeComment = (id: number, message: string) => (dispatch: any) => {
+const ChangeComment = (id: number, message: string) => (dispatch: Dispatch) => {
 	let Comment = {
 		id,
 		message,
 	}
 
-	// @ts-ignore
 	dispatch(actions.changeComment(Comment))
 }
 
-export default {
-	AddComment,
-	DeleteComment,
-	ChangeComment
-};
+const operations = {AddComment, DeleteComment, ChangeComment}
+export default operations

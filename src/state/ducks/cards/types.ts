@@ -2,8 +2,5 @@ const ADD = "cards/ADD"
 const DELETE = "cards/DELETE"
 const CHANGE = "cards/CHANGE"
 
-export default {
-    ADD,
-    DELETE,
-    CHANGE
-}
+const types = {ADD, DELETE, CHANGE}
+export default types

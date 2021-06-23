@@ -1,6 +1,12 @@
 import React, {ReactNode} from "react";
 import styled from "styled-components";
 
+const ModalExternal = ({children}: { children: ReactNode }) => {
+    return <StyledModals>{children}</StyledModals>
+}
+
+export default ModalExternal
+
 const StyledModals = styled.div`
 
     padding-top: 5rem;
@@ -14,12 +20,6 @@ const StyledModals = styled.div`
     justify-content: center;
     
 `
-
-const ModalExternal = ({children}: { children: ReactNode }) => {
-    return <StyledModals>{children}</StyledModals>
-}
-
-export default ModalExternal
 
 
 

@@ -1,24 +1,30 @@
 import React from 'react'
 import Column from "./Column/Column"
-import {Flex} from "../../ui/index";
+import {Flex} from "ui";
+import {
+	IAddCard, IAddComment, ICard,
+	IChangeCard, IChangeComment, IColumn,
+	IComment, IDeleteCard, IDeleteComment,
+	IEditColumnTitle
+} from "interface";
 
 interface IProps {
 	cards: {
-		cards: { id: number, columnId: number, cardTitle: string, cardContent: string, author: string }[],
-		addCard: (columnId: number, cardTitle: string, cardContent: string) => void,
-		deleteCard: (id: number) => void,
-		changeCard: (id: number, cardTitle: string, cardContent: string) => void,
+		cards: ICard[],
+		addCard: IAddCard,
+		deleteCard: IDeleteCard,
+		changeCard: IChangeCard,
 	},
 	columns: {
-		columns: { id: number, columnTitle: string }[]
-		editColumnTitle: (id: number, title: string) => void
+		columns: IColumn[],
+		editColumnTitle: IEditColumnTitle
 
 	},
 	comments: {
-		comments: { id: number, cardId: number, message: string, author: string }[]
-		addComment: (id: number, message: string) => void,
-		changeComment: (id: number, message: string) => void,
-		deleteComment: (id: number) => void
+		comments: IComment[],
+		addComment: IAddComment,
+		changeComment: IChangeComment,
+		deleteComment: IDeleteComment
 	}
 }
 

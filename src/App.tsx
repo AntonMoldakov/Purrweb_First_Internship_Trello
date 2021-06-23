@@ -1,7 +1,7 @@
 import React from 'react'
 import {Wrapper} from "./ui/index";
 import ColumnsContainer from 'components/Columns/ColumnsContainer';
-import AuthContainer from "./components/Auth/AuthContainer";
+import AuthContainer from "components/Auth/AuthContainer";
 
 function App() {
     return (
@@ -9,7 +9,6 @@ function App() {
             <AuthContainer/>
             <h1>TrelloCopy</h1>
             <ColumnsContainer/>
-
         </Wrapper>
     )
 }

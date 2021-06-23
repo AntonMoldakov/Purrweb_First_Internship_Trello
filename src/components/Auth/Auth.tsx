@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Modal} from "../../ui/index";
+import {Modal} from "ui";
 import AuthBody from './AuthBody';
 
 function Auth(props: { userNameChange: (name: string) => void }) {

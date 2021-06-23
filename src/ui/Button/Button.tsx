@@ -22,6 +22,8 @@ const Button = (props: ButtonProps) => {
 
 }
 
+export default Button
+
 const StyledButton = styled.button<ButtonProps>`
     &:active && focus {
     outline: none;
@@ -63,4 +65,3 @@ const StyledButton = styled.button<ButtonProps>`
     `}
 `
 
-export default Button

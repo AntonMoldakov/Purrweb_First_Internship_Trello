@@ -1,16 +1,13 @@
 import type from "./types";
-
-interface IState {
-	comments: { id: number, cardId: number, message: string, author: string }[]
-}
+import {IComment} from "interface";
 
 interface IActions {
 	type: string,
 	id?: number,
-	comment?: { id: number, cardId: number, message: string, author: string }
+	comment: IComment
 }
 
-const initialState: IState = {
+const initialState = {
 	comments: [{id: 80, cardId: 80, message: '', author: ''}]
 }
 
@@ -20,8 +17,8 @@ const commentsReducer = (state = initialState, action: IActions) => {
 			return {...state, comments: [...state.comments, action.comment]};
 		case type.CHANGE:
 			return {
-				...state, comments: state.comments.map(comment => {// @ts-ignore
-					if (comment.id === action.comment.id) {// @ts-ignore
+				...state, comments: state.comments.map(comment => {
+					if (comment.id === action.comment.id) {
 						comment.message = action.comment.message
 					}
 					return comment
@@ -34,6 +31,4 @@ const commentsReducer = (state = initialState, action: IActions) => {
 	}
 }
 
-
-// @ts-ignore
 export default commentsReducer;

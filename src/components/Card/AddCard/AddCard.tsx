@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import Modal from "ui/Modal/Modal";
 import {Button} from "ui";
 import AddCardBody from "./AddCardBody";
+import {IAddCard} from "interface";
 
 interface IProps {
-	addCard: (columnId: number, cardTitle: string, cardContent: string) => void,
+	addCard: IAddCard,
 	columnId: number
 }
 

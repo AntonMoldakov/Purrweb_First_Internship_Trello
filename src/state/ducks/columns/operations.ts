@@ -1,13 +1,14 @@
 import actions from "./actions";
+import {Dispatch} from "redux";
 
-const ChangeColumn = (id: number, columnTitle: string) => (dispatch: any) => {
+const ChangeColumn = (id: number, columnTitle: string) => (dispatch: Dispatch) => {
 	let Column = {
 		id,
 		columnTitle,
 	}
 
-	// @ts-ignore
 	dispatch(actions.changeColumn(Column))
 }
 
-export default {ChangeColumn};
+const operations = {ChangeColumn}
+export default operations

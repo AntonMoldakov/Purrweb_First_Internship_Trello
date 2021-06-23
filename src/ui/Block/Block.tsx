@@ -1,6 +1,13 @@
 import React, {ReactNode} from "react";
 import styled from "styled-components";
 
+
+const Block = ({children}: { children: ReactNode }) => {
+    return <StyledBlock>{children}</StyledBlock>
+}
+
+export default Block
+
 const StyledBlock = styled.div`
     display: block;
      
@@ -11,13 +18,6 @@ const StyledBlock = styled.div`
     text-align: start;
     
 `
-
-const Block = ({children}: { children: ReactNode }) => {
-    return <StyledBlock>{children}</StyledBlock>
-}
-
-export default Block
-
 
 
 

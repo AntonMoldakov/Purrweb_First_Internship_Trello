@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 import './Modal.css'
-import {Flex, Position, ModalExternal, ModalWindow, TitleH2, Button} from "../index";
+import {Flex, Position, ModalExternal, ModalWindow, TitleH2, Button} from "ui";
 
 interface IProps {
     setIsOpen: (value: boolean) => void,
