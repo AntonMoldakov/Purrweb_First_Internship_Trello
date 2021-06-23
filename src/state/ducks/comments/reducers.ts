@@ -1,34 +1,33 @@
-import type from "./types";
 import {IComment} from "interface";
-
-interface IActions {
-	type: string,
-	id?: number,
-	comment: IComment
-}
+import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
 	comments: [{id: 80, cardId: 80, message: '', author: ''}]
 }
 
-const commentsReducer = (state = initialState, action: IActions) => {
-	switch (action.type) {
-		case type.ADD:
-			return {...state, comments: [...state.comments, action.comment]};
-		case type.CHANGE:
-			return {
-				...state, comments: state.comments.map(comment => {
-					if (comment.id === action.comment.id) {
-						comment.message = action.comment.message
-					}
-					return comment
-				})
-			}
-		case type.DELETE:
-			return {...state, comments: state.comments.filter(comment => comment.id !== action.id)}
-		default:
-			return state;
+const comments = createSlice({
+	name: 'CommentsReducer',
+	initialState,
+	reducers: {
+		addCommentA(state, action: { payload: IComment }) {
+			state.comments.push(action.payload)
+		},
+		changeCommentA(state, action: { payload: { id: number, message: string } }) {
+			state.comments.map(comment => {
+				if (comment.id === action.payload.id) {
+					comment.message = action.payload.message
+				}
+				return comment
+			})
+		},
+		deleteCommentA(state, action: { payload: { id: number } }) {
+			const {id} = action.payload
+			const {comments} = state
+			const index = comments.findIndex((comment) => id === comment.id);
+			comments.splice(index, 1)
+		}
 	}
-}
+})
 
-export default commentsReducer;
+export default comments.reducer
+export const {addCommentA, changeCommentA, deleteCommentA} = comments.actions

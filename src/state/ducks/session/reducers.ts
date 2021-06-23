@@ -1,21 +1,18 @@
-import type from "./types";
-
-interface IActions {
-	type: string,
-	userName?: string
-}
+import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
 	userName: 'Guest'
 }
 
-const columnsReducer = (state = initialState, action: IActions) => {
-	switch (action.type) {
-		case type.AUTH:
-			return {...state, userName: action.userName}
-		default:
-			return state;
+const session = createSlice({
+	name: 'sessionReducer',
+	initialState,
+	reducers: {
+		authA(state, action: { payload: string }) {
+			state.userName = action.payload
+		}
 	}
-}
+})
 
-export default columnsReducer;
+export default session.reducer
+export const {authA} = session.actions

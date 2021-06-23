@@ -1,5 +1,5 @@
-import actions from "./actions";
 import {Dispatch} from "redux";
+import {addCardA, changeCardA, deleteCardA} from "./reducers";
 
 const AddCard = (columnId: number, cardTitle: string, cardContent: string) => (dispatch: Dispatch) => {
 	let card = {
@@ -10,12 +10,10 @@ const AddCard = (columnId: number, cardTitle: string, cardContent: string) => (d
 		author: "das"
 	}
 
-	let action = actions.addCard(card)
-
-	dispatch(action)
+	dispatch(addCardA(card))
 }
 const DeleteCard = (id: number) => (dispatch: Dispatch) => {
-	dispatch(actions.deleteCard(id))
+	dispatch(deleteCardA({id}))
 }
 const ChangeCard = (id: number, cardTitle: string, cardContent: string) => (dispatch: Dispatch) => {
 	let Card = {
@@ -24,7 +22,7 @@ const ChangeCard = (id: number, cardTitle: string, cardContent: string) => (disp
 		cardContent,
 	}
 
-	dispatch(actions.changeCard(Card))
+	dispatch(changeCardA(Card))
 }
 
 

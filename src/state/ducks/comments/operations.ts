@@ -1,5 +1,5 @@
-import actions from "./actions";
 import {Dispatch} from "redux";
+import {addCommentA, changeCommentA, deleteCommentA} from "./reducers";
 
 const AddComment = (cardId: number, message: string) => (dispatch: Dispatch) => {
 	let comment = {
@@ -9,20 +9,18 @@ const AddComment = (cardId: number, message: string) => (dispatch: Dispatch) => 
 		author: 'sad'
 	}
 
-	let action = actions.addComment(comment)
-
-	dispatch(action)
+	dispatch(addCommentA(comment))
 }
 const DeleteComment = (id: number) => (dispatch: Dispatch) => {
-	dispatch(actions.deleteComment(id))
+	dispatch(deleteCommentA({id}))
 }
 const ChangeComment = (id: number, message: string) => (dispatch: Dispatch) => {
 	let Comment = {
 		id,
-		message,
+		message
 	}
 
-	dispatch(actions.changeComment(Comment))
+	dispatch(changeCommentA(Comment))
 }
 
 const operations = {AddComment, DeleteComment, ChangeComment}

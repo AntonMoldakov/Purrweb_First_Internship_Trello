@@ -1,35 +1,35 @@
 import {ICard} from "interface";
-import type from "./types";
-
-interface IActions {
-	type: string,
-	id?: number,
-	card: ICard
-}
+import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
 	cards: [{id: 80, columnId: 0, cardTitle: '', cardContent: '', author: ''}]
 }
 
-const cardsReducer = (state = initialState, action: IActions) => {
-	switch (action.type) {
-		case type.ADD:
-			return {...state, cards: [...state.cards, action.card]};
-		case type.CHANGE:
-			return {
-				...state, cards: state.cards.map(card => {
-					if (card.id === action.card.id) {
-						card.cardTitle = action.card.cardTitle
-						card.cardContent = action.card.cardContent
-					}
-					return card
-				})
-			}
-		case type.DELETE:
-			return {...state, cards: state.cards.filter(card => card.id !== action.id)}
-		default:
-			return state;
-	}
-}
+const cards = createSlice({
+	name: 'CommentsReducer',
+	initialState,
+	reducers: {
+		addCardA(state, action: { payload: ICard }) {
+			state.cards.push(action.payload)
+		},
+		changeCardA(state, action: { payload: { id: number, cardTitle: string, cardContent: string } }) {
+			state.cards.map(card => {
+				if (card.id === action.payload.id) {
+					card.cardTitle = action.payload.cardTitle
+					card.cardContent = action.payload.cardContent
+				}
+				return card
+			})
+		},
+		deleteCardA(state, action: { payload: { id: number } }) {
+			const {id} = action.payload
+			const {cards} = state
+			const index = cards.findIndex((card) => id === card.id);
+			cards.splice(index, 1)
+		}
 
-export default cardsReducer;
+	}
+})
+
+export default cards.reducer
+export const {addCardA, changeCardA, deleteCardA} = cards.actions

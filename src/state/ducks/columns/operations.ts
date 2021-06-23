@@ -1,5 +1,5 @@
-import actions from "./actions";
 import {Dispatch} from "redux";
+import {changeColumnA} from "./reducers";
 
 const ChangeColumn = (id: number, columnTitle: string) => (dispatch: Dispatch) => {
 	let Column = {
@@ -7,7 +7,7 @@ const ChangeColumn = (id: number, columnTitle: string) => (dispatch: Dispatch) =
 		columnTitle,
 	}
 
-	dispatch(actions.changeColumn(Column))
+	dispatch(changeColumnA(Column))
 }
 
 const operations = {ChangeColumn}

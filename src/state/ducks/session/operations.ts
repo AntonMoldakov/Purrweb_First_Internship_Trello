@@ -1,8 +1,8 @@
-import actions from "./actions";
 import {Dispatch} from "redux";
+import {authA} from "./reducers";
 
 const Auth = (userName: string) => (dispatch: Dispatch) => {
-	dispatch(actions.Auth(userName))
+	dispatch(authA(userName))
 }
 
 const operations = {Auth}

@@ -1,11 +1,4 @@
-import type from "./types";
-import {IColumn} from "interface";
-
-interface IActions {
-	type: string,
-	id: number,
-	column: IColumn
-}
+import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
 	columns: [{id: 1, columnTitle: 'TODO'},
@@ -14,20 +7,20 @@ const initialState = {
 		{id: 4, columnTitle: 'Done'}]
 }
 
-const columnsReducer = (state = initialState, action: IActions) => {
-	switch (action.type) {
-		case type.CHANGE:
-			return {
-				...state, comments: state.columns.map(column => {
-					if (column.id === action.column.id) {
-						column.columnTitle = action.column.columnTitle
-					}
-					return column
-				})
-			}
-		default:
-			return state;
+const column = createSlice({
+	name: 'ColumnReducer',
+	initialState,
+	reducers: {
+		changeColumnA(state, action: { payload: { id: number, columnTitle: string } }) {
+			state.columns.map(column => {
+				if (column.id === action.payload.id) {
+					column.columnTitle = action.payload.columnTitle
+				}
+				return column
+			})
+		}
 	}
-}
+})
 
-export default columnsReducer;
+export default column.reducer
+export const {changeColumnA} = column.actions
