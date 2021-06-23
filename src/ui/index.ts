@@ -1,4 +1,4 @@
-export {default as Button}  from "./Button/Button"
+export {Button} from "./Button"
 export {default as Block} from './Block/Block'
 export {default as Comments} from './Comments/Comments'
 export {default as Flex} from './Flex/Flex'

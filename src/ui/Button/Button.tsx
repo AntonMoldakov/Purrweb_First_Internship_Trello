@@ -2,15 +2,25 @@ import React, {ButtonHTMLAttributes, ReactNode} from "react";
 import styled from "styled-components";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    children: ReactNode,
-    type?: "submit" | "reset" | "button",
-    $sub?: boolean,
-    $addCard?: boolean,
-    $cross?: boolean,
-    onClick?: () => void
+	children: ReactNode,
+	type?: "submit" | "reset" | "button",
+	$sub?: boolean,
+	$addCard?: boolean,
+	$cross?: boolean,
+	onClick?: () => void
 
 }
 
+const Button = (props: ButtonProps) => {
+	const {onClick, type, children, $cross, $addCard, $sub} = props
+
+	return <StyledButton onClick={onClick} type={type}
+	                     $sub={$sub} $cross={$cross}
+	                     $addCard={$addCard}>
+		{children}
+	</StyledButton>
+
+}
 
 const StyledButton = styled.button<ButtonProps>`
     &:active && focus {
@@ -52,17 +62,5 @@ const StyledButton = styled.button<ButtonProps>`
         cursor: pointer;
     `}
 `
-
-const Button = (props: ButtonProps) => {
-    const {onClick, type, children, $cross, $addCard, $sub} = props
-
-    return <StyledButton onClick={onClick} type={type}
-                         $sub={$sub} $cross={$cross}
-                         $addCard={$addCard}>
-        {children}
-    </StyledButton>
-
-}
-
 
 export default Button

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createGlobalStyle} from 'styled-components';
+import store from 'state/store'
+import {Provider} from "react-redux";
 
 const Global = createGlobalStyle`
 * {
@@ -20,11 +22,12 @@ body {
 `
 
 
+
 ReactDOM.render(
-    <>
+    <Provider store={store}>
         <Global/>
         <App/>
-    </>,
+    </Provider>,
     document.getElementById('root')
 );
 
