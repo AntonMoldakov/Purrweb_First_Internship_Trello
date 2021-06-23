@@ -1,9 +1,6 @@
 import actions from "./actions";
-import store from "../../store";
 
 const AddComment = (cardId: number, message: string) => (dispatch: any) => {
-	// @ts-ignore
-	// let author = store.getState().sessionReducer.userName
 	let comment = {
 		id: +(new Date()),
 		cardId,
