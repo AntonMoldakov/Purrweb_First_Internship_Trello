@@ -39,10 +39,7 @@ function Card({cardProps, comments}: IProps) {
 		cardProps.changeCard(card.id, values.title, values.text)
 	}
 	const SendComment = (values: { comment: string }) => {
-		if (values.comment || values.comment !== '') {
-			comments.addComment(card.id, values.comment)
-		}
-		values.comment = ''
+		comments.addComment(card.id, values.comment)
 	}
 	return (
 		<div>

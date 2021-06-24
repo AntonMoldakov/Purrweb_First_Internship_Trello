@@ -1,15 +1,10 @@
 import React from "react";
 import {Field, Form} from "react-final-form";
-import {Button, TitleH2, Flex} from "ui";
+import {Button, TitleH2, Flex, Error} from "ui";
 import CardComments from "../CardComments/CardComments";
 import {IAddComment, IChangeComment, IComment, IDeleteComment} from "interface";
 
-const required = (v: string) => {
-	if (!v || v.trim() === '') {
-		return 'This field is required'
-	}
-	return undefined
-}
+const required = (v: string) => (!v || v.trim() === '') ? 'required' : undefined
 
 
 interface IProps {
@@ -32,12 +27,17 @@ function CardChange({onSubmit, comments, SendComment, cardTitle, cardContent}: I
 				onSubmit={onSubmit}
 				render={({handleSubmit}) => (
 					<form onSubmit={handleSubmit}>
-						<Flex $justifyContent={'space-between'} $margin={'0 0 .5rem'}>
-							<Field className={'form__field'} name={'title'}
-							       component={'input'} placeholder={'title'}
-							       defaultValue={cardTitle} validate={required}/>
+						<Flex $margin={'0 0 .5rem'}>
+							<Field name={'title'} validate={required} defaultValue={cardTitle}>
+								{({input, meta}) => (
+									<Flex $justifyContent={'space-between'}>
+										<input className={'form__field'}  {...input} type="title" placeholder="title"/>
+										{meta.error && meta.touched && <Error>{meta.error}</Error>}
+									</Flex>
+								)}
+							</Field>
 						</Flex>
-						<Flex $justifyContent={'space-between'} $margin={'0 0 0.5rem'}>
+						<Flex $margin={'0 0 0.5rem'}>
 							<Field className={'form__field textarea'} name={'text'} component={'textarea'}
 							       placeholder={'text'} defaultValue={cardContent}/>
 						</Flex>
@@ -54,7 +54,7 @@ function CardChange({onSubmit, comments, SendComment, cardTitle, cardContent}: I
 						<Flex $justifyContent={'space-between'} $alignItems={'flex-end'}>
 							<Flex $justifyContent={'space-between'} $margin={'0 0 0.5rem'}>
 								<Field className={'form__field textarea'} name={'comment'}
-								       component={'textarea'} placeholder={'comment'}/>
+								       component={'textarea'} placeholder={'comment'} validate={required}/>
 							</Flex>
 							<Button $sub type="submit">Send</Button>
 						</Flex>
