@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createGlobalStyle} from 'styled-components';
-import store from 'state/store'
+import {store, persistor} from 'state/store'
 import {Provider} from "react-redux";
+import {PersistGate} from 'redux-persist/integration/react'
 
 const Global = createGlobalStyle`
 * {
@@ -22,13 +23,14 @@ body {
 `
 
 
-
 ReactDOM.render(
-    <Provider store={store}>
-        <Global/>
-        <App/>
-    </Provider>,
-    document.getElementById('root')
+	<Provider store={store}>
+		<PersistGate persistor={persistor}>
+			<Global/>
+			<App/>
+		</PersistGate>
+	</Provider>,
+	document.getElementById('root')
 );
 
 reportWebVitals();
