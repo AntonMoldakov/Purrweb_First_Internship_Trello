@@ -12,6 +12,8 @@ interface IProps {
 	SendComment: (values: { comment: string }) => void,
 	cardTitle: string,
 	cardContent: string,
+	author: string,
+	columnTitle: string,
 	comments: {
 		comments: IComment[]
 		addComment: IAddComment,
@@ -20,9 +22,10 @@ interface IProps {
 	},
 }
 
-function CardChange({onSubmit, comments, SendComment, cardTitle, cardContent}: IProps) {
+function CardChange({columnTitle, onSubmit, author, comments, SendComment, cardTitle, cardContent}: IProps) {
 	return (
 		<div>
+			<TitleH2>{columnTitle}</TitleH2>
 			<Form
 				onSubmit={onSubmit}
 				render={({handleSubmit}) => (
@@ -41,7 +44,11 @@ function CardChange({onSubmit, comments, SendComment, cardTitle, cardContent}: I
 							<Field className={'form__field textarea'} name={'text'} component={'textarea'}
 							       placeholder={'text'} defaultValue={cardContent}/>
 						</Flex>
-						<Button $sub type="submit">Save</Button>
+						<Flex $justifyContent={'space-between'}>
+							<div>{author}</div>
+							<Button $sub type="submit">Save</Button>
+						</Flex>
+
 					</form>
 				)}
 			/>

@@ -38,7 +38,7 @@ function Column({cards, comments, column, editColumnTitle}: IProps) {
 					                                card,
 					                                deleteCard: cards.deleteCard,
 					                                changeCard: cards.changeCard
-				                                }} comments={comments}/>)
+				                                }} columnTitle={column.columnTitle} comments={comments}/>)
 			}
 			<div>
 				<AddCard addCard={cards.addCard} columnId={column.id}/>

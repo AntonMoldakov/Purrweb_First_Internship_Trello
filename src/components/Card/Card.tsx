@@ -19,7 +19,8 @@ interface IProps {
 		addComment: IAddComment,
 		changeComment: IChangeComment,
 		deleteComment: IDeleteComment,
-	}
+	},
+	columnTitle: string
 }
 
 function contentLength(content: string): string {
@@ -29,7 +30,7 @@ function contentLength(content: string): string {
 	return content
 }
 
-function Card({cardProps, comments}: IProps) {
+function Card({cardProps, columnTitle, comments}: IProps) {
 	const card = cardProps.card
 	const [isOpen, setIsOpen] = useState(false)
 	const filteredComments = comments.comments.filter(comment => comment.cardId === card.id)
@@ -44,6 +45,7 @@ function Card({cardProps, comments}: IProps) {
 		<div>
 			{
 				isOpen && <Modal children={<CardChange
+					author={card.author} columnTitle={columnTitle}
 					onSubmit={onSubmit}
 					cardTitle={card.cardTitle} cardContent={card.cardContent}
 					SendComment={SendComment} comments={{
