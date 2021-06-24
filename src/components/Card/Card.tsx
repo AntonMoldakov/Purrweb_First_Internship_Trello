@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import styles from './Card.module.css'
-import {TitleH4, Button, Modal, Flex} from "ui";
+import {TitleH4, Button, Modal, Flex, FooterText, Position, CardBlock} from "ui";
 import CardChange from './CardChange/CardChange';
 import {
 	IAddComment, ICard, IChangeCard,
@@ -54,25 +53,25 @@ function Card({cardProps, comments}: IProps) {
 					deleteComment: comments.deleteComment
 				}}/>} setIsOpen={setIsOpen} title={''}/>
 			}
-			<div onClick={() => {
+			<CardBlock onClick={() => {
 				setIsOpen(true)
-			}} className={styles.card}>
-				<div className={styles.header}>
+			}}>
+				<Position $textAlign={'end'}>
 					<Button $cross onClick={() => cardProps.deleteCard(card.id)}>X</Button>
-				</div>
+				</Position>
 				<TitleH4>{card.cardTitle}</TitleH4>
 				<div>
 					{contentLength(card.cardContent)}
 				</div>
 				<Flex $justifyContent={'space-between'}>
-					<div className={styles.footer}>
+					<FooterText>
 						{card.author}
-					</div>
-					<div className={styles.footer}>
+					</FooterText>
+					<FooterText>
 						comments: {filteredComments.length}
-					</div>
+					</FooterText>
 				</Flex>
-			</div>
+			</CardBlock>
 		</div>
 
 	)
