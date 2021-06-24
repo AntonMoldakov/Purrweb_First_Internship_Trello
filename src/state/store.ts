@@ -1,10 +1,10 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit"
-import * as reducers from "./ducks";
+import {configureStore} from "@reduxjs/toolkit"
+import {persistStore} from 'redux-persist'
+import reducers from "./ducks/rootReducers";
 
-const rootReducer = combineReducers(reducers);
 
-const store = configureStore({
-	reducer: rootReducer
+export const store = configureStore({
+	reducer: reducers
 })
+export const persistor = persistStore(store)
 
-export default store

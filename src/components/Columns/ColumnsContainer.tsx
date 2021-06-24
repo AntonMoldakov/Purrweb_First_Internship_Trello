@@ -1,20 +1,16 @@
 import React from "react";
 import Columns from "./Columns";
-import {useDispatch, useSelector} from "react-redux";
+import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {cardsOperations} from "state/ducks/cards";
 import {columnOperations} from "state/ducks/columns";
 import {commentOperations} from "state/ducks/comments";
 
-
 function ColumnsContainer() {
 	const dispatch = useDispatch()
-	const state = useSelector(state => state)
+	const state = useSelector((state: RootStateOrAny) => state)
 
-	// @ts-ignore
 	let cards = state.cardsReducer.cards
-	// @ts-ignore
 	let columns = state.columnsReducer.columns
-	// @ts-ignore
 	let comments = state.commentsReducer.comments
 
 	function addCard(columnId: number, cardTitle: string, cardContent: string) {
@@ -45,7 +41,6 @@ function ColumnsContainer() {
 		dispatch(commentOperations.ChangeComment(id, message))
 	}
 
-	// @ts-ignore
 	return <Columns cards={{cards, addCard, deleteCard, changeCard}}
 	                columns={{columns, editColumnTitle: changeColumn}}
 	                comments={{comments, addComment, deleteComment, changeComment}}/>
