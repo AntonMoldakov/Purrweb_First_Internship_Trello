@@ -1,22 +1,16 @@
-import React, {ReactNode} from "react";
+import React, {HTMLAttributes} from "react";
 import styled from "styled-components";
 
-interface TitleProps {
-	children: ReactNode,
-	$cursor?: string,
-	onClick?: () => void
-}
-
-const TitleH4 = (props: TitleProps) => {
-	const {$cursor, children, onClick} = props
-	return <StyledTitle onClick={onClick} $cursor={$cursor}>{children}</StyledTitle>
+const TitleH4 = (props: HTMLAttributes<HTMLElement>) => {
+	const {children, onClick} = props
+	return <StyledTitle onClick={onClick}>{children}</StyledTitle>
 }
 
 export default TitleH4
 
-const StyledTitle = styled.h4<TitleProps>`
+const StyledTitle = styled.h4`
     margin: 0 0 .5rem;
     color: white;
-    $cursor: ${({$cursor}) => $cursor || 'auto'};
+    $cursor: pointer;
    
 `

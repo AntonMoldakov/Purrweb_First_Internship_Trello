@@ -1,13 +1,14 @@
-import React, {ReactNode} from "react";
+import React, {HTMLAttributes} from "react";
 import styled from "styled-components";
 
-const Error = ({children}: { children: ReactNode }) => {
+const Error = ({children}: HTMLAttributes<HTMLSpanElement>) => {
 	return <StyledError>{children}</StyledError>
 }
 
 export default Error
 
 const StyledError = styled.span`
+	margin: 0 0 0 .5rem;
     color: tomato
 `
 

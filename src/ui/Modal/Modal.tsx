@@ -1,28 +1,25 @@
 import React, {ReactNode} from "react";
 import './Modal.css'
-import {Flex, Position, ModalExternal, ModalWindow, TitleH2, Button} from "ui";
+import {ModalContent, ModalExternal, ModalWindow, TitleH2, Cross} from "ui";
 
 interface IProps {
-    setIsOpen: (value: boolean) => void,
-    title?: string,
-    children: ReactNode
+	setIsOpen: (value: boolean) => void,
+	title?: string,
+	children: ReactNode
 }
 
 function Modal({setIsOpen, title, children}: IProps) {
-    return (
-        <ModalExternal>
-            <ModalWindow>
-                <Flex $justifyContent={'space-between'} $padding={'.5rem .5rem .5rem 2rem'}>
-                    <TitleH2>{title ? title : null}</TitleH2>
-                    <Button $cross onClick={() => setIsOpen(false)}>X
-                    </Button>
-                </Flex>
-                <Position $padding={'.5rem 1.5rem'}>
-                    {children}
-                </Position>
-            </ModalWindow>
-        </ModalExternal>
-    )
+	return (
+		<ModalExternal>
+			<ModalWindow>
+				<Cross onClick={() => setIsOpen(false)}/>
+				{title ? <TitleH2>title</TitleH2> : null}
+				<ModalContent>
+					{children}
+				</ModalContent>
+			</ModalWindow>
+		</ModalExternal>
+	)
 }
 
 export default Modal

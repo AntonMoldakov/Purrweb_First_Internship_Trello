@@ -1,10 +1,11 @@
 import {Dispatch} from "redux";
 import {addCardA, changeCardA, deleteCardA} from "./reducers";
 
-const AddCard = (columnId: number, cardTitle: string, cardContent: string) => (dispatch: Dispatch) => {
+const AddCard = (columnId: number, columnTitle: string, cardTitle: string, cardContent: string) => (dispatch: Dispatch) => {
 	let card = {
 		id: +(new Date()),
 		columnId,
+		columnTitle,
 		cardTitle,
 		cardContent,
 		author: "das"

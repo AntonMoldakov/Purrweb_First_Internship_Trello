@@ -1,12 +1,13 @@
 export interface ICard {
 	id: number,
 	columnId: number,
+	columnTitle: string,
 	cardTitle: string,
 	cardContent: string,
 	author: string
 }
 
-export type IAddCard = (columnId: number, cardTitle: string, cardContent: string) => void
+export type IAddCard = (columnId: number, columnTitle: string, cardTitle: string, cardContent: string) => void
 export type IDeleteCard = (id: number) => void
 export type IChangeCard = (id: number, cardTitle: string, cardContent: string) => void
 

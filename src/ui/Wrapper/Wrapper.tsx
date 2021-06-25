@@ -1,7 +1,7 @@
-import React, {ReactNode} from "react";
+import React, {HTMLAttributes} from "react";
 import styled from "styled-components";
 
-const Wrapper = ({children}: { children: ReactNode }) => {
+const Wrapper = ({children}: HTMLAttributes<HTMLDivElement>) => {
 	return <StyledWrapper>{children}</StyledWrapper>
 }
 

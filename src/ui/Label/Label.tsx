@@ -1,22 +1,13 @@
-import React, {HTMLAttributes, ReactNode} from "react";
+import React, {HTMLAttributes} from "react";
 import styled from "styled-components";
 
-export interface LabelProps extends HTMLAttributes<HTMLElement> {
-	children: ReactNode,
-	$padding?: string,
-	$margin?: string
+const Label = ({children}: HTMLAttributes<HTMLLabelElement>) => {
+	return <StyledLabel>{children}</StyledLabel>
 }
-
-const Label = (props: LabelProps) => {
-	const {children, $margin, $padding} = props
-	return <StyledLabel $margin={$margin} $padding={$padding}>{children}</StyledLabel>
-}
-
 export default Label
 
-const StyledLabel = styled.div<LabelProps>`
-    margin: ${({$margin}) => $margin || 0};
-    padding: ${({$padding}) => $padding || 0};
+const StyledLabel = styled.div`
+    margin: 0 1rem 0 0;
 `
 
 

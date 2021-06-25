@@ -1,9 +1,8 @@
-import React, {ReactNode} from "react";
+import React, {HTMLAttributes} from "react";
 import styled from "styled-components";
 
-const TitleH2 = ({children}: {children: ReactNode}) => {
-
-    return <StyledTitle>{children}</StyledTitle>
+const TitleH2 = ({children}: HTMLAttributes<HTMLElement>) => {
+	return <StyledTitle>{children}</StyledTitle>
 }
 
 export default TitleH2

@@ -2,7 +2,7 @@ import {ICard} from "interface";
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-	cards: [{id: 80, columnId: 0, cardTitle: '', cardContent: '', author: ''}]
+	cards: [{id: 80, columnId: 0, columnTitle: '', cardTitle: '', cardContent: '', author: ''}]
 }
 
 const cards = createSlice({

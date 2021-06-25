@@ -1,16 +1,8 @@
 import React, {TextareaHTMLAttributes} from "react";
 import styled from "styled-components"
 
-export interface ITextArea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-	onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
-	autoFocus?: boolean,
-	value: string,
-	onBlur?: () => void
-}
-
-const TextArea = (props: ITextArea) => {
-	const {onChange, autoFocus, onBlur, value} = props
-	return <StyledTextArea onChange={onChange} autoFocus={autoFocus} onBlur={onBlur} value={value}/>
+const TextArea = (props: TextareaHTMLAttributes<HTMLTextAreaElement>) => {
+	return <StyledTextArea {...props}/>
 }
 
 export default TextArea
