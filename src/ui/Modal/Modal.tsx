@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 import './Modal.css'
-import {ModalContent, ModalExternal, ModalWindow, TitleH2, Cross} from "ui";
+import {ModalContent, Overlay, ModalWindow, TitleH2, Cross, Header} from "ui";
 
 interface IProps {
 	setIsOpen: (value: boolean) => void,
@@ -9,16 +9,20 @@ interface IProps {
 }
 
 function Modal({setIsOpen, title, children}: IProps) {
-	return (
-		<ModalExternal>
+	return (<>
+			<Overlay onClick={() => setIsOpen(false)}/>
 			<ModalWindow>
-				<Cross onClick={() => setIsOpen(false)}/>
-				{title ? <TitleH2>title</TitleH2> : null}
+				<Header>
+					<div>
+						{title ? <TitleH2>{title}</TitleH2> : null}
+					</div>
+					<Cross onClick={() => setIsOpen(false)}/>
+				</Header>
 				<ModalContent>
 					{children}
 				</ModalContent>
 			</ModalWindow>
-		</ModalExternal>
+		</>
 	)
 }
 

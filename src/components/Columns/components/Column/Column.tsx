@@ -18,10 +18,11 @@ interface IProps {
 		column: IColumn,
 		editColumnTitle: IEditColumnTitle
 	},
+	userName: string
 }
 
 
-function Column({cards, columns}: IProps) {
+function Column({cards, columns, userName}: IProps) {
 	const [isOpen, setIsOpen] = useState(false)
 
 	const [editMode, setEditMode] = useState(false);
@@ -41,7 +42,7 @@ function Column({cards, columns}: IProps) {
 	}
 
 	const onSubmit = (values: { title: string, text: string }): void => {
-		cards.addCard(columns.column.id, columns.column.columnTitle, values.title, values.text)
+		cards.addCard(columns.column.id, columns.column.columnTitle, values.title, values.text, userName)
 		setIsOpen(false)
 	}
 	return (
@@ -68,7 +69,7 @@ function Column({cards, columns}: IProps) {
 						card,
 						deleteCard: cards.deleteCard,
 						changeCard: cards.changeCard
-					}}/>)
+					}} userName={userName}/>)
 			}
 			<div>
 				<AddCardButton onClick={() => setIsOpen(true)}/>

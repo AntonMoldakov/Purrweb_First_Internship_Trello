@@ -13,9 +13,10 @@ function Columns() {
 
 	const cards = state.cardsReducer.cards
 	const columns = state.columnsReducer.columns
+	const userName = state.sessionReducer.userName
 
-	function addCard(columnId: number, columnTitle: string, cardTitle: string, cardContent: string) {
-		dispatch(cardsOperations.AddCard(columnId, columnTitle, cardTitle, cardContent))
+	function addCard(columnId: number, columnTitle: string, cardTitle: string, cardContent: string, userName: string) {
+		dispatch(cardsOperations.AddCard(columnId, columnTitle, cardTitle, cardContent, userName))
 	}
 
 	function deleteCard(id: number) {
@@ -34,7 +35,8 @@ function Columns() {
 		<FlexColumn>
 			{
 				columns.map((column: IColumn) => <Column key={column.id} cards={{cards, addCard, deleteCard, changeCard}}
-				                                         columns={{column, editColumnTitle: changeColumn}}/>)
+				                                         columns={{column, editColumnTitle: changeColumn}}
+				                                         userName={userName}/>)
 			}
 		</FlexColumn>
 	)

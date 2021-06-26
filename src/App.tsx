@@ -1,5 +1,5 @@
 import React from 'react'
-import {Wrapper} from "./ui/index";
+import {Wrapper} from "ui";
 import {Auth, Columns} from "components";
 import {Provider} from "react-redux";
 import {persistor, store} from "./state/store";
@@ -27,8 +27,8 @@ function App() {
 			<PersistGate persistor={persistor}>
 				<Global/>
 				<Wrapper>
-					<Auth/>
 					<h1>TrelloCopy</h1>
+					<Auth/>
 					<Columns/>
 				</Wrapper>
 			</PersistGate>

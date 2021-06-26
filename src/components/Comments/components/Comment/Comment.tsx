@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Block, Cross, Flex, TextArea, TitleH4} from "ui";
+import {Block, Cross, Header, TextArea, TitleH4} from "ui";
 import {IChangeComment, IComment, IDeleteComment} from "interface";
 
 interface IProps {
@@ -30,10 +30,10 @@ function Comment({comments}: IProps) {
 	}
 	return (
 		<Block>
-			<Flex>
+			<Header>
 				<TitleH4>{comment.author}</TitleH4>
 				<Cross onClick={comments.deleteComment.bind(null, comment.id)}/>
-			</Flex>
+			</Header>
 			<div>
 				{!editMode &&
 				<div>

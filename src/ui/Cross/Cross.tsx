@@ -15,7 +15,6 @@ const StyledCross = styled.button`
     &:-moz-focus-inner {
     border: 0;
     }
-    margin: 0 0 0 90%;
         color: white;
         background: none;
         border: none;

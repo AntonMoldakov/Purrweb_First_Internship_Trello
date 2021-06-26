@@ -4,8 +4,11 @@ import {Button, Flex, Label, Error, FormItem} from "ui";
 
 const required = (v: string) => (!v || v.trim() === '') ? 'required' : undefined
 
+interface IProps {
+	onSubmit: (values: { title: string, text: string }) => void
+}
 
-function AddCard({onSubmit}: { onSubmit: (values: { title: string, text: string }) => void }) {
+function AddCard({onSubmit}: IProps) {
 	return (
 		<Form
 			onSubmit={onSubmit}

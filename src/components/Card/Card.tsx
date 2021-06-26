@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {TitleH4, Cross, Modal, Footer, CardBlock} from "ui";
+import {TitleH4, Cross, Modal, Footer, CardBlock, Header} from "ui";
 import {CardChange} from './components';
 import {
 	ICard, IChangeCard,
@@ -14,7 +14,8 @@ interface IProps {
 		card: ICard,
 		deleteCard: IDeleteCard,
 		changeCard: IChangeCard,
-	}
+	},
+	userName: string
 }
 
 function contentLength(content: string): string {
@@ -24,13 +25,13 @@ function contentLength(content: string): string {
 	return content
 }
 
-function Card({cards}: IProps) {
+function Card({cards, userName}: IProps) {
 	const dispatch = useDispatch()
 	const state = useSelector((state: RootStateOrAny) => state)
 	let comments = state.commentsReducer.comments
 
-	function addComment(cardId: number, message: string) {
-		dispatch(commentOperations.AddComment(cardId, message))
+	function addComment(cardId: number, message: string, userName: string) {
+		dispatch(commentOperations.AddComment(cardId, message, userName))
 	}
 
 	function deleteComment(id: number) {
@@ -50,7 +51,7 @@ function Card({cards}: IProps) {
 		cards.changeCard(card.id, values.title, values.text)
 	}
 	const SendComment = (values: { comment: string }) => {
-		addComment(card.id, values.comment)
+		addComment(card.id, values.comment, userName)
 	}
 	return (
 		<div>
@@ -68,9 +69,12 @@ function Card({cards}: IProps) {
 			<CardBlock onClick={() => {
 				setIsOpen(true)
 			}}>
-				<Cross onClick={() => cards.deleteCard(card.id)}/>
-				<TitleH4>{card.cardTitle}</TitleH4>
+				<Header>
+					<div/>
+					<Cross onClick={() => cards.deleteCard(card.id)}/>
+				</Header>
 				<div>
+					<TitleH4>{card.cardTitle}</TitleH4>
 					{contentLength(card.cardContent)}
 				</div>
 				<Footer>

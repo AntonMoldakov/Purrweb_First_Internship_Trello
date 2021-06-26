@@ -7,7 +7,7 @@ export interface ICard {
 	author: string
 }
 
-export type IAddCard = (columnId: number, columnTitle: string, cardTitle: string, cardContent: string) => void
+export type IAddCard = (columnId: number, columnTitle: string, cardTitle: string, cardContent: string, userName: string) => void
 export type IDeleteCard = (id: number) => void
 export type IChangeCard = (id: number, cardTitle: string, cardContent: string) => void
 
@@ -19,7 +19,7 @@ export interface IComment {
 	author: string
 }
 
-export type IAddComment = (cardId: number, message: string) => void
+export type IAddComment = (cardId: number, message: string, userName: string) => void
 export type IDeleteComment = (id: number) => void
 export type IChangeComment = (id: number, message: string) => void
 
