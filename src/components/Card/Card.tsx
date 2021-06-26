@@ -1,12 +1,6 @@
-import React, {useState} from 'react'
-import {TitleH4, Cross, Modal, Footer, CardBlock, Header} from "ui";
-import {CardChange} from './components';
-import {
-	ICard, IChangeCard,
-	IComment, IDeleteCard,
-} from "interface";
-import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
-import {commentOperations} from "state/ducks/comments";
+import React from 'react'
+import {TitleH4, Cross, Footer, CardBlock, Header} from "ui";
+import {ICard, IChangeCard, IDeleteCard} from "interface";
 
 
 interface IProps {
@@ -15,7 +9,8 @@ interface IProps {
 		deleteCard: IDeleteCard,
 		changeCard: IChangeCard,
 	},
-	userName: string
+	setCardIsOpen: (props: { isOpen: boolean, cardId: number }) => void,
+	countComments: number
 }
 
 function contentLength(content: string): string {
@@ -25,49 +20,12 @@ function contentLength(content: string): string {
 	return content
 }
 
-function Card({cards, userName}: IProps) {
-	const dispatch = useDispatch()
-	const state = useSelector((state: RootStateOrAny) => state)
-	let comments = state.commentsReducer.comments
-
-	function addComment(cardId: number, message: string, userName: string) {
-		dispatch(commentOperations.AddComment(cardId, message, userName))
-	}
-
-	function deleteComment(id: number) {
-		dispatch(commentOperations.DeleteComment(id))
-	}
-
-	function changeComment(id: number, message: string) {
-		dispatch(commentOperations.ChangeComment(id, message))
-	}
-
-	const card = cards.card
-	const [isOpen, setIsOpen] = useState(false)
-	const filteredComments = comments.filter((comment: IComment) => comment.cardId === card.id)
-
-
-	const onSubmit = (values: { title: string, text: string }) => {
-		cards.changeCard(card.id, values.title, values.text)
-	}
-	const SendComment = (values: { comment: string }) => {
-		addComment(card.id, values.comment, userName)
-	}
+function Card({cards, setCardIsOpen, countComments}: IProps) {
+	const {card} = cards
 	return (
 		<div>
-			{
-				isOpen && <Modal setIsOpen={setIsOpen} title={''}>
-					<CardChange cards={cards}
-					            onSubmit={onSubmit}
-					            SendComment={SendComment} comments={{
-						comments: filteredComments,
-						deleteComment,
-						changeComment
-					}}/>
-				</Modal>
-			}
 			<CardBlock onClick={() => {
-				setIsOpen(true)
+				setCardIsOpen({isOpen: true, cardId: card.id})
 			}}>
 				<Header>
 					<div/>
@@ -82,12 +40,11 @@ function Card({cards, userName}: IProps) {
 						{card.author}
 					</div>
 					<div>
-						comments: {filteredComments.length}
+						comments: {countComments}
 					</div>
 				</Footer>
 			</CardBlock>
 		</div>
-
 	)
 }
 

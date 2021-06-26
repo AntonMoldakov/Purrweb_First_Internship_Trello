@@ -11,7 +11,7 @@ interface IProps {
 	onSubmit: (values: { title: string, text: string }) => void,
 	SendComment: (values: { comment: string }) => void,
 	cards: {
-		card: ICard,
+		cards: ICard[],
 		deleteCard: IDeleteCard,
 		changeCard: IChangeCard,
 	},
@@ -20,18 +20,21 @@ interface IProps {
 		changeComment: IChangeComment,
 		deleteComment: IDeleteComment,
 	},
+	cardId: number
 }
 
-function CardChange({cards, onSubmit, comments, SendComment}: IProps) {
+function CardChange({cards, cardId, onSubmit, comments, SendComment}: IProps) {
+	const filteredComments = comments.comments.filter((comment: IComment) => comment.cardId === cardId)
+	const [card] = cards.cards.filter((card: ICard) => card.id === cardId)
 	return (
 		<div>
-			<TitleH2>{cards.card.columnTitle}</TitleH2>
+			<TitleH2>{card.columnTitle}</TitleH2>
 			<Form
 				onSubmit={onSubmit}
 				render={({handleSubmit}) => (
 					<form onSubmit={handleSubmit}>
 						<FormItem>
-							<Field name={'title'} validate={required} defaultValue={cards.card.cardTitle}>
+							<Field name={'title'} validate={required} defaultValue={card.cardTitle}>
 								{({input, meta}) => (
 									<Flex>
 										<input className={'form__field'}  {...input} type="title" placeholder="title"/>
@@ -42,10 +45,10 @@ function CardChange({cards, onSubmit, comments, SendComment}: IProps) {
 						</FormItem>
 						<FormItem>
 							<Field className={'form__field textarea'} name={'text'} component={'textarea'}
-							       placeholder={'text'} defaultValue={cards.card.cardContent}/>
+							       placeholder={'text'} defaultValue={card.cardContent}/>
 						</FormItem>
 						<Footer>
-							<div>{cards.card.author}</div>
+							<div>{card.author}</div>
 							<Button type="submit">Save</Button>
 						</Footer>
 
@@ -70,7 +73,11 @@ function CardChange({cards, onSubmit, comments, SendComment}: IProps) {
 			/>
 
 			<div>
-				<Comments comments={comments}/>
+				<Comments comments={{
+					comments: filteredComments,
+					deleteComment: comments.deleteComment,
+					changeComment: comments.changeComment
+				}}/>
 			</div>
 		</div>
 	)
