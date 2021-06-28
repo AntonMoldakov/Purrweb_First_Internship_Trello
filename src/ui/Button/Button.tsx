@@ -1,22 +1,10 @@
-import React, {ButtonHTMLAttributes, ReactNode} from "react";
+import React, {ButtonHTMLAttributes} from "react";
 import styled from "styled-components";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	children: ReactNode,
-	type?: "submit" | "reset" | "button",
-	$sub?: boolean,
-	$addCard?: boolean,
-	$cross?: boolean,
-	onClick?: () => void
+const Button = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
+	const {onClick, type, children,} = props
 
-}
-
-const Button = (props: ButtonProps) => {
-	const {onClick, type, children, $cross, $addCard, $sub} = props
-
-	return <StyledButton onClick={onClick} type={type}
-	                     $sub={$sub} $cross={$cross}
-	                     $addCard={$addCard}>
+	return <StyledButton onClick={onClick} type={type}>
 		{children}
 	</StyledButton>
 
@@ -24,14 +12,13 @@ const Button = (props: ButtonProps) => {
 
 export default Button
 
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.button`
     &:active && focus {
     outline: none;
     }
     &:-moz-focus-inner {
     border: 0;
     }
-    ${({$sub}) => $sub && `
         margin: .5rem 0;
          padding: .5rem;
          background: white;
@@ -43,25 +30,5 @@ const StyledButton = styled.button<ButtonProps>`
          &:hover {
             background: #b4b4b4;
          }
-    `}
-    ${({$addCard}) => $addCard && `
-        width: 100%;
-        color: #ccc;
-        background-color: #333336;
-        border: 1px solid darkgray;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color .2s linear;
-         &:hover {
-            color: white;
-            background-color: #47474A;
-         }
-    `}
-    ${({$cross}) => $cross && `
-        color: white;
-        background: none;
-        border: none;
-        cursor: pointer;
-    `}
 `
 

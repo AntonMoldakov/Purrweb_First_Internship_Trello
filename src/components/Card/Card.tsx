@@ -1,26 +1,14 @@
-import React, {useState} from 'react'
-import {TitleH4, Button, Modal, Flex, FooterText, Position, CardBlock} from "ui";
-import CardChange from './CardChange/CardChange';
-import {
-	IAddComment, ICard, IChangeCard,
-	IChangeComment, IComment, IDeleteCard,
-	IDeleteComment
-} from "interface";
+import React from 'react'
+import {TitleH4, Cross, Footer, CardBlock, Header} from "ui";
+import {ICard} from "interface";
+import {cardsOperations} from "state/ducks/cards";
+import {useAppDispatch} from "hooks";
 
 
 interface IProps {
-	cardProps: {
-		card: ICard,
-		deleteCard: IDeleteCard,
-		changeCard: IChangeCard,
-	},
-	comments: {
-		comments: IComment[]
-		addComment: IAddComment,
-		changeComment: IChangeComment,
-		deleteComment: IDeleteComment,
-	},
-	columnTitle: string
+	card: ICard,
+	setModalCard: (props: { isOpen: boolean, cardId: number }) => void,
+	countComments: number
 }
 
 function contentLength(content: string): string {
@@ -30,52 +18,36 @@ function contentLength(content: string): string {
 	return content
 }
 
-function Card({cardProps, columnTitle, comments}: IProps) {
-	const card = cardProps.card
-	const [isOpen, setIsOpen] = useState(false)
-	const filteredComments = comments.comments.filter(comment => comment.cardId === card.id)
+function Card({card, setModalCard, countComments}: IProps) {
+	const dispatch = useAppDispatch()
 
-	const onSubmit = (values: { title: string, text: string }) => {
-		cardProps.changeCard(card.id, values.title, values.text)
+	function deleteCard(id: number) {
+		dispatch(cardsOperations.DeleteCard(id))
 	}
-	const SendComment = (values: { comment: string }) => {
-		comments.addComment(card.id, values.comment)
-	}
+
 	return (
 		<div>
-			{
-				isOpen && <Modal children={<CardChange
-					author={card.author} columnTitle={columnTitle}
-					onSubmit={onSubmit}
-					cardTitle={card.cardTitle} cardContent={card.cardContent}
-					SendComment={SendComment} comments={{
-					comments: filteredComments,
-					addComment: comments.addComment,
-					changeComment: comments.changeComment,
-					deleteComment: comments.deleteComment
-				}}/>} setIsOpen={setIsOpen} title={''}/>
-			}
-			<CardBlock onClick={() => {
-				setIsOpen(true)
-			}}>
-				<Position $textAlign={'end'}>
-					<Button $cross onClick={() => cardProps.deleteCard(card.id)}>X</Button>
-				</Position>
-				<TitleH4>{card.cardTitle}</TitleH4>
-				<div>
+			<CardBlock>
+				<Header>
+					<div/>
+					<Cross onClick={() => deleteCard(card.id)}/>
+				</Header>
+				<div onClick={() => {
+					setModalCard({isOpen: true, cardId: card.id})
+				}}>
+					<TitleH4>{card.cardTitle}</TitleH4>
 					{contentLength(card.cardContent)}
 				</div>
-				<Flex $justifyContent={'space-between'}>
-					<FooterText>
+				<Footer>
+					<div>
 						{card.author}
-					</FooterText>
-					<FooterText>
-						comments: {filteredComments.length}
-					</FooterText>
-				</Flex>
+					</div>
+					<div>
+						comments: {countComments}
+					</div>
+				</Footer>
 			</CardBlock>
 		</div>
-
 	)
 }
 

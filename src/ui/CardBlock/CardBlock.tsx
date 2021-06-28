@@ -1,19 +1,15 @@
-import React, {HTMLAttributes, ReactNode} from "react";
+import React, {HTMLAttributes} from "react";
 import styled from "styled-components";
 
-export interface CardBlockProps extends HTMLAttributes<HTMLElement> {
-	children: ReactNode,
-	onClick: () => void
-}
 
-const CardBlock = (props: CardBlockProps) => {
+const CardBlock = (props: HTMLAttributes<HTMLDivElement>) => {
 	const {onClick, children} = props
 	return <StyledCardBlock onClick={onClick}>{children}</StyledCardBlock>
 }
 
 export default CardBlock
 
-const StyledCardBlock = styled.div<CardBlockProps>`
+const StyledCardBlock = styled.div`
     padding: .5rem 1rem;
     margin-bottom: .5rem;
     background-color: #333336;

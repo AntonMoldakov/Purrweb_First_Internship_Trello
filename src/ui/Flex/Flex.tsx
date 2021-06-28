@@ -1,31 +1,15 @@
-import React, {HTMLAttributes, ReactNode} from "react";
+import React, {HTMLAttributes} from "react";
 import styled from "styled-components";
 
-export interface FlexProps extends HTMLAttributes<HTMLElement> {
-    children: ReactNode,
-    $alignItems?: string,
-    $padding?: string,
-    $margin?: string,
-    $justifyContent?: string
-
+const Flex = ({children}: HTMLAttributes<HTMLDivElement>) => {
+	return <StyledFlex>{children}</StyledFlex>
 }
-
-const Flex = (props: FlexProps) => {
-    const {children, $justifyContent, $alignItems, $margin, $padding} = props
-    return <StyledFlex $justifyContent={$justifyContent} $alignItems={$alignItems}
-                       $margin={$margin} $padding={$padding}>{children}</StyledFlex>
-}
-
 export default Flex
 
-const StyledFlex = styled.div<FlexProps>`
+const StyledFlex = styled.div`
     display: flex;
-    width: 100%;
-    justify-content: ${({$justifyContent}) => $justifyContent || 'flex-start'};
-    align-items: ${({$alignItems}) => $alignItems || 'stretch'};
-    margin: ${({$margin}) => $margin || 0};
-    padding: ${({$padding}) => $padding || 0};
-    
+    width: 100%;  
+    align-items: flex-end;  
 `
 
 

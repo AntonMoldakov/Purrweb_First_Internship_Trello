@@ -1,12 +1,12 @@
 import {Dispatch} from "redux";
 import {addCommentA, changeCommentA, deleteCommentA} from "./reducers";
 
-const AddComment = (cardId: number, message: string) => (dispatch: Dispatch) => {
+const AddComment = (cardId: number, message: string, userName: string) => (dispatch: Dispatch) => {
 	let comment = {
 		id: +(new Date()),
 		cardId,
 		message,
-		author: 'sad'
+		author: userName
 	}
 
 	dispatch(addCommentA(comment))

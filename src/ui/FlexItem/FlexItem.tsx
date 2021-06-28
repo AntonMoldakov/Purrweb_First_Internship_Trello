@@ -1,25 +1,17 @@
-import React, {HTMLAttributes, ReactNode} from "react";
+import React, {HTMLAttributes} from "react";
 import styled from "styled-components";
 
-export interface FlexItemProps extends HTMLAttributes<HTMLElement> {
-    children: ReactNode,
-    $column?: boolean
-}
-
-const FlexItem = (props: FlexItemProps) => {
-    const {$column, children} = props
-    return <StyledFlexItem $column={$column}>{children}</StyledFlexItem>
+const FlexItem = ({children}: HTMLAttributes<HTMLDivElement>) => {
+	return <StyledFlexItem>{children}</StyledFlexItem>
 }
 
 export default FlexItem
 
-const StyledFlexItem = styled.div<FlexItemProps>`
-    ${({$column}) => $column && `
+const StyledFlexItem = styled.div`
         margin: 0 .5rem;
         width: 300px;
         border-radius: 5px;
         text-align: center;
-    `}
 `
 
 
