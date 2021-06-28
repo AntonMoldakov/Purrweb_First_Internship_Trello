@@ -6,6 +6,7 @@ import {Comments} from 'components';
 import {cardsOperations} from "state/ducks/cards";
 import {useDispatch} from "react-redux";
 import {commentOperations} from "state/ducks/comments";
+import {AppDispatch} from "state/store";
 
 const required = (v: string) => (!v || v.trim() === '') ? 'required' : undefined
 
@@ -17,13 +18,13 @@ interface IProps {
 }
 
 function CardChange({cards, cardId, userName}: IProps) {
+	const dispatch = useDispatch<AppDispatch>()
+
 	const filteredCards = useMemo(() =>
 		() =>
 			cards.filter(card => card.id === cardId), [cards])
 
 	const [card] = filteredCards()
-
-	const dispatch = useDispatch()
 
 	function changeCard(id: number, cardTitle: string, cardContent: string) {
 		dispatch(cardsOperations.ChangeCard(id, cardTitle, cardContent))

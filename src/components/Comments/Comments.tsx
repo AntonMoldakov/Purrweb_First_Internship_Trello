@@ -2,14 +2,16 @@ import React, {useMemo} from "react";
 import {CommentsBlock} from "ui";
 import {Comment} from "./components";
 import {IComment} from "interface";
-import {store} from "state/store";
+import {RootState} from "state/store";
+import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 interface IProps {
 	cardId: number
 }
 
 function Comments({cardId}: IProps) {
-	const comments = store.getState().commentsReducer.comments
+	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+	const comments = useAppSelector(state => state).commentsReducer.comments
 
 	const filteredComments = useMemo(() =>
 		() =>
