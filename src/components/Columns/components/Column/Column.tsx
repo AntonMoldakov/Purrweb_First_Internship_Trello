@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useMemo, useState} from 'react'
 import {AddCardButton, FlexItem, Input, TitleH4} from 'ui';
 import {Card} from "components";
 import {ICard, IColumn, IComment, IEditColumnTitle} from "interface";
@@ -32,6 +32,14 @@ function Column({cards, columns, setModalCard, comments, setIsOpen}: IProps) {
 		setTitle(e.target.value);
 	}
 
+	const filteredCards = useMemo(() =>
+		() =>
+			cards.filter(card => card.columnId === columns.column.id), [cards])
+
+	const filteredComments = useMemo(() =>
+		(cardId: number) =>
+			comments.filter((comment: IComment) => comment.cardId === cardId), [comments])
+
 	return (
 		<FlexItem>
 			<div>
@@ -50,10 +58,9 @@ function Column({cards, columns, setModalCard, comments, setIsOpen}: IProps) {
 				}
 			</div>
 			{
-				cards.filter(cards => cards.columnId === columns.column.id)
-					.map(card => <Card key={card.id} card={card}
-					                   countComments={comments.filter((comment: IComment) => comment.cardId === card.id).length}
-					                   setModalCard={setModalCard}/>)
+				filteredCards().map(card => <Card key={card.id} card={card}
+				                                  countComments={filteredComments(card.id).length}
+				                                  setModalCard={setModalCard}/>)
 			}
 			<div>
 				<AddCardButton onClick={() => setIsOpen({

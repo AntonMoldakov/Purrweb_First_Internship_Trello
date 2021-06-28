@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {CommentsBlock} from "ui";
 import {Comment} from "./components";
 import {IComment} from "interface";
@@ -10,11 +10,15 @@ interface IProps {
 
 function Comments({cardId}: IProps) {
 	const comments = store.getState().commentsReducer.comments
-	const filteredComments = comments.filter((comment: IComment) => comment.cardId === cardId)
+
+	const filteredComments = useMemo(() =>
+		() =>
+			comments.filter((comment: IComment) => comment.cardId === cardId), [comments])
+
 	return (
 		<CommentsBlock>
 			{
-				filteredComments.map(comment => <Comment key={comment.id} comment={comment}/>)
+				filteredComments().map(comment => <Comment key={comment.id} comment={comment}/>)
 			}
 		</CommentsBlock>
 	)

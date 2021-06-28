@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {Field, Form} from "react-final-form";
 import {Button, TitleH2, Flex, Error, Footer, FormItem} from "ui";
 import {ICard} from "interface";
-import {Comments} from 'components/index';
+import {Comments} from 'components';
 import {cardsOperations} from "state/ducks/cards";
 import {useDispatch} from "react-redux";
 import {commentOperations} from "state/ducks/comments";
@@ -17,7 +17,11 @@ interface IProps {
 }
 
 function CardChange({cards, cardId, userName}: IProps) {
-	const [card] = cards.filter((card: ICard) => card.id === cardId)
+	const filteredCards = useMemo(() =>
+		() =>
+			cards.filter(card => card.id === cardId), [cards])
+
+	const [card] = filteredCards()
 
 	const dispatch = useDispatch()
 

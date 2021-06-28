@@ -4,19 +4,18 @@ import {FlexColumn, Modal} from "ui";
 import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {cardsOperations} from "state/ducks/cards";
 import {columnOperations} from "state/ducks/columns";
-import {IColumn} from "interface";
-import {AddCard} from "../AddCard";
-import {CardChange} from "../Card/components/CardChange";
+import {CardChange, AddCard} from "components";
+import {store} from "state/store";
 
 
 function Columns() {
 	const dispatch = useDispatch()
 	const state = useSelector((state: RootStateOrAny) => state)
 
-	const cards = state.cardsReducer.cards
-	const columns = state.columnsReducer.columns
-	const comments = state.commentsReducer.comments
-	const userName = state.sessionReducer.userName
+	const cards = store.getState().cardsReducer.cards
+	const columns = store.getState().columnsReducer.columns
+	const comments = store.getState().commentsReducer.comments
+	const userName = store.getState().sessionReducer.userName
 
 	function addCard(columnId: number, columnTitle: string, cardTitle: string, cardContent: string, userName: string) {
 		dispatch(cardsOperations.AddCard(columnId, columnTitle, cardTitle, cardContent, userName))
@@ -44,12 +43,13 @@ function Columns() {
 	return (
 		<FlexColumn>
 			{
-				columns.map((column: IColumn) => <Column key={column.id} cards={cards}
-				                                         columns={{column, editColumnTitle: changeColumn}}
-				                                         comments={comments}
-				                                         setIsOpen={setModalAddCard} setModalCard={setModalCard}/>)
+				columns.map(column => <Column key={column.id} cards={cards}
+				                              columns={{column, editColumnTitle: changeColumn}}
+				                              comments={comments} setIsOpen={setModalAddCard}
+				                              setModalCard={setModalCard}/>)
 			}
-			{ModalAddCard.isOpen && <Modal setIsOpen={ModalClosed} title={'Create card'}>
+			{ModalAddCard.isOpen &&
+			<Modal setIsOpen={ModalClosed} title={'Create card'}>
 				<AddCard onSubmit={onSubmit}/>
 			</Modal>
 			}
