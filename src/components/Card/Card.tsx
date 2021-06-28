@@ -1,15 +1,13 @@
 import React from 'react'
 import {TitleH4, Cross, Footer, CardBlock, Header} from "ui";
-import {ICard, IChangeCard, IDeleteCard} from "interface";
+import {ICard} from "interface";
+import {useDispatch} from "react-redux";
+import {cardsOperations} from "state/ducks/cards";
 
 
 interface IProps {
-	cards: {
-		card: ICard,
-		deleteCard: IDeleteCard,
-		changeCard: IChangeCard,
-	},
-	setCardIsOpen: (props: { isOpen: boolean, cardId: number }) => void,
+	card: ICard,
+	setModalCard: (props: { isOpen: boolean, cardId: number }) => void,
 	countComments: number
 }
 
@@ -20,18 +18,23 @@ function contentLength(content: string): string {
 	return content
 }
 
-function Card({cards, setCardIsOpen, countComments}: IProps) {
-	const {card} = cards
+function Card({card, setModalCard, countComments}: IProps) {
+	const dispatch = useDispatch()
+
+	function deleteCard(id: number) {
+		dispatch(cardsOperations.DeleteCard(id))
+	}
+
 	return (
 		<div>
-			<CardBlock onClick={() => {
-				setCardIsOpen({isOpen: true, cardId: card.id})
-			}}>
+			<CardBlock>
 				<Header>
 					<div/>
-					<Cross onClick={() => cards.deleteCard(card.id)}/>
+					<Cross onClick={() => deleteCard(card.id)}/>
 				</Header>
-				<div>
+				<div onClick={() => {
+					setModalCard({isOpen: true, cardId: card.id})
+				}}>
 					<TitleH4>{card.cardTitle}</TitleH4>
 					{contentLength(card.cardContent)}
 				</div>

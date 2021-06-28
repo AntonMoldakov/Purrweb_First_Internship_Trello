@@ -1,37 +1,23 @@
 import React, {useState} from 'react'
-import {AddCardButton, FlexItem, Input, TitleH4, Modal} from 'ui';
-import {Card, CardChange} from "components";
-import {
-	IAddComment, ICard,
-	IChangeCard, IChangeComment, IColumn, IComment,
-	IDeleteCard, IDeleteComment, IEditColumnTitle
-} from "interface";
+import {AddCardButton, FlexItem, Input, TitleH4} from 'ui';
+import {Card} from "components";
+import {ICard, IColumn, IComment, IEditColumnTitle} from "interface";
 
 interface IProps {
-	cards: {
-		cards: ICard[],
-		deleteCard: IDeleteCard,
-		changeCard: IChangeCard,
-	},
+	cards: ICard[],
 	columns: {
 		column: IColumn,
 		editColumnTitle: IEditColumnTitle
 	},
-	comments: {
-		comments: IComment[],
-		addComment: IAddComment,
-		deleteComment: IDeleteComment,
-		changeComment: IChangeComment,
-	}
-	userName: string,
+	comments: IComment[],
+	setModalCard: (props: { isOpen: boolean, cardId: number }) => void,
 	setIsOpen: (props: { isOpen: boolean, columnId: number, columnTitle: string }) => void
 }
 
 
-function Column({cards, columns, userName, comments, setIsOpen}: IProps) {
+function Column({cards, columns, setModalCard, comments, setIsOpen}: IProps) {
 	const [editMode, setEditMode] = useState(false);
 	const [title, setTitle] = useState(columns.column.columnTitle);
-	const [ModalCard, setModalCard] = useState({isOpen: false, cardId: 0})
 
 	const activateEditMode = () => {
 		setEditMode(true);
@@ -44,18 +30,6 @@ function Column({cards, columns, userName, comments, setIsOpen}: IProps) {
 
 	const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setTitle(e.target.value);
-	}
-
-	const CardClosed = (value: boolean) => {
-		setModalCard({isOpen: value, cardId: 0})
-	}
-
-	const onSubmitCard = (values: { title: string, text: string }) => {
-		cards.changeCard(ModalCard.cardId, values.title, values.text)
-	}
-
-	const SendComment = (values: { comment: string }) => {
-		comments.addComment(ModalCard.cardId, values.comment, userName)
 	}
 
 	return (
@@ -76,13 +50,10 @@ function Column({cards, columns, userName, comments, setIsOpen}: IProps) {
 				}
 			</div>
 			{
-				cards.cards.filter(cards => cards.columnId === columns.column.id)
-					.map(card => <Card key={card.id} cards={{
-						card,
-						deleteCard: cards.deleteCard,
-						changeCard: cards.changeCard
-					}} countComments={comments.comments.filter((comment: IComment) => comment.cardId === card.id).length}
-					                   setCardIsOpen={setModalCard}/>)
+				cards.filter(cards => cards.columnId === columns.column.id)
+					.map(card => <Card key={card.id} card={card}
+					                   countComments={comments.filter((comment: IComment) => comment.cardId === card.id).length}
+					                   setModalCard={setModalCard}/>)
 			}
 			<div>
 				<AddCardButton onClick={() => setIsOpen({
@@ -91,13 +62,6 @@ function Column({cards, columns, userName, comments, setIsOpen}: IProps) {
 					columnTitle: columns.column.columnTitle
 				})}/>
 			</div>
-			{
-				ModalCard.isOpen &&
-				<Modal setIsOpen={CardClosed} title={''}>
-					<CardChange onSubmit={onSubmitCard} SendComment={SendComment}
-					            cards={cards} comments={comments} cardId={ModalCard.cardId}/>
-				</Modal>
-			}
 		</FlexItem>
 	)
 }

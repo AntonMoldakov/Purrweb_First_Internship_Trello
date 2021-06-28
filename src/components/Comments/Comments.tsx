@@ -1,27 +1,20 @@
 import React from "react";
 import {CommentsBlock} from "ui";
-import {IChangeComment, IComment, IDeleteComment} from "interface";
 import {Comment} from "./components";
+import {IComment} from "interface";
+import {store} from "state/store";
 
 interface IProps {
-	comments: {
-		comments: IComment[],
-		changeComment: IChangeComment,
-		deleteComment: IDeleteComment,
-	}
+	cardId: number
 }
 
-function Comments({comments}: IProps) {
+function Comments({cardId}: IProps) {
+	const comments = store.getState().commentsReducer.comments
+	const filteredComments = comments.filter((comment: IComment) => comment.cardId === cardId)
 	return (
 		<CommentsBlock>
 			{
-				comments.comments.map(comment => {
-					return <Comment key={comment.id} comments={{
-						comment,
-						changeComment: comments.changeComment,
-						deleteComment: comments.deleteComment
-					}}/>
-				})
+				filteredComments.map(comment => <Comment key={comment.id} comment={comment}/>)
 			}
 		</CommentsBlock>
 	)

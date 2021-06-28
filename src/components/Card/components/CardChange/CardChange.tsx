@@ -1,36 +1,47 @@
 import React from "react";
 import {Field, Form} from "react-final-form";
 import {Button, TitleH2, Flex, Error, Footer, FormItem} from "ui";
-import {ICard, IChangeCard, IChangeComment, IComment, IDeleteCard, IDeleteComment} from "interface";
+import {ICard} from "interface";
 import {Comments} from 'components/index';
+import {cardsOperations} from "state/ducks/cards";
+import {useDispatch} from "react-redux";
+import {commentOperations} from "state/ducks/comments";
 
 const required = (v: string) => (!v || v.trim() === '') ? 'required' : undefined
 
 
 interface IProps {
-	onSubmit: (values: { title: string, text: string }) => void,
-	SendComment: (values: { comment: string }) => void,
-	cards: {
-		cards: ICard[],
-		deleteCard: IDeleteCard,
-		changeCard: IChangeCard,
-	},
-	comments: {
-		comments: IComment[],
-		changeComment: IChangeComment,
-		deleteComment: IDeleteComment,
-	},
-	cardId: number
+	cards: ICard[],
+	cardId: number,
+	userName: string
 }
 
-function CardChange({cards, cardId, onSubmit, comments, SendComment}: IProps) {
-	const filteredComments = comments.comments.filter((comment: IComment) => comment.cardId === cardId)
-	const [card] = cards.cards.filter((card: ICard) => card.id === cardId)
+function CardChange({cards, cardId, userName}: IProps) {
+	const [card] = cards.filter((card: ICard) => card.id === cardId)
+
+	const dispatch = useDispatch()
+
+	function changeCard(id: number, cardTitle: string, cardContent: string) {
+		dispatch(cardsOperations.ChangeCard(id, cardTitle, cardContent))
+	}
+
+	function addComment(cardId: number, message: string, userName: string) {
+		dispatch(commentOperations.AddComment(cardId, message, userName))
+	}
+
+	const onSubmitCard = (values: { title: string, text: string }) => {
+		changeCard(cardId, values.title, values.text)
+	}
+
+	const SendComment = (values: { comment: string }) => {
+		addComment(cardId, values.comment, userName)
+	}
+
 	return (
 		<div>
 			<TitleH2>{card.columnTitle}</TitleH2>
 			<Form
-				onSubmit={onSubmit}
+				onSubmit={onSubmitCard}
 				render={({handleSubmit}) => (
 					<form onSubmit={handleSubmit}>
 						<FormItem>
@@ -71,13 +82,8 @@ function CardChange({cards, cardId, onSubmit, comments, SendComment}: IProps) {
 					</form>
 				)}
 			/>
-
 			<div>
-				<Comments comments={{
-					comments: filteredComments,
-					deleteComment: comments.deleteComment,
-					changeComment: comments.changeComment
-				}}/>
+				<Comments cardId={cardId}/>
 			</div>
 		</div>
 	)

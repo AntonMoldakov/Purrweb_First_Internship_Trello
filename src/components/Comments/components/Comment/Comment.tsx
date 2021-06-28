@@ -1,17 +1,24 @@
 import React, {useState} from "react";
 import {Block, Cross, Header, TextArea, TitleH4} from "ui";
-import {IChangeComment, IComment, IDeleteComment} from "interface";
+import {IComment} from "interface";
+import {useDispatch} from "react-redux";
+import {commentOperations} from "state/ducks/comments";
 
 interface IProps {
-	comments: {
-		comment: IComment
-		changeComment: IChangeComment,
-		deleteComment: IDeleteComment,
-	}
+	comment: IComment
 }
 
-function Comment({comments}: IProps) {
-	const comment = comments.comment
+function Comment({comment}: IProps) {
+	const dispatch = useDispatch()
+
+	function deleteComment(id: number) {
+		dispatch(commentOperations.DeleteComment(id))
+	}
+
+	function changeComment(id: number, message: string) {
+		dispatch(commentOperations.ChangeComment(id, message))
+	}
+
 	const [editMode, setEditMode] = useState(false);
 	const [mess, setMess] = useState(comment.message);
 
@@ -21,7 +28,7 @@ function Comment({comments}: IProps) {
 
 	const deactivateEditMode = (id: number) => {
 		if (mess.trim() !== '') {
-			comments.changeComment(id, mess);
+			changeComment(id, mess);
 			setEditMode(false);
 		}
 	}
@@ -32,7 +39,7 @@ function Comment({comments}: IProps) {
 		<Block>
 			<Header>
 				<TitleH4>{comment.author}</TitleH4>
-				<Cross onClick={comments.deleteComment.bind(null, comment.id)}/>
+				<Cross onClick={deleteComment.bind(null, comment.id)}/>
 			</Header>
 			<div>
 				{!editMode &&
