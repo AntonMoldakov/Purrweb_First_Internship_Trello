@@ -4,9 +4,8 @@ import {Button, TitleH2, Flex, Error, Footer, FormItem} from "ui";
 import {ICard} from "interface";
 import {Comments} from 'components';
 import {cardsOperations} from "state/ducks/cards";
-import {useDispatch} from "react-redux";
 import {commentOperations} from "state/ducks/comments";
-import {AppDispatch} from "state/store";
+import {useAppDispatch} from "hooks";
 
 const required = (v: string) => (!v || v.trim() === '') ? 'required' : undefined
 
@@ -18,7 +17,7 @@ interface IProps {
 }
 
 function CardChange({cards, cardId, userName}: IProps) {
-	const dispatch = useDispatch<AppDispatch>()
+	const dispatch = useAppDispatch()
 
 	const filteredCards = useMemo(() =>
 		() =>

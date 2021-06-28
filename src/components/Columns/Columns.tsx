@@ -1,20 +1,18 @@
 import React, {useState} from 'react'
 import {Column} from "./components"
 import {FlexColumn, Modal} from "ui";
-import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {cardsOperations} from "state/ducks/cards";
 import {columnOperations} from "state/ducks/columns";
 import {CardChange, AddCard} from "components";
-import {AppDispatch, RootState} from "state/store";
+import {useAppDispatch, useAppSelector} from 'hooks';
 
 function Columns() {
-	const dispatch = useDispatch<AppDispatch>()
-	const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-
-	const cards = useAppSelector(state => state).cardsReducer.cards
-	const columns = useAppSelector(state => state).columnsReducer.columns
-	const comments = useAppSelector(state => state).commentsReducer.comments
-	const userName = useAppSelector(state => state).sessionReducer.userName
+	const dispatch = useAppDispatch()
+	const [cards, columns, comments, userName] = useAppSelector(
+		(state) => {
+			const {cardsReducer, columnsReducer, commentsReducer, sessionReducer} = state
+			return [cardsReducer.cards, columnsReducer.columns, commentsReducer.comments, sessionReducer.userName]
+		});
 
 	function addCard(columnId: number, columnTitle: string, cardTitle: string, cardContent: string, userName: string) {
 		dispatch(cardsOperations.AddCard(columnId, columnTitle, cardTitle, cardContent, userName))

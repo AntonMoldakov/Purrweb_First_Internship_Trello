@@ -1,9 +1,8 @@
 import React from 'react'
 import {TitleH4, Cross, Footer, CardBlock, Header} from "ui";
 import {ICard} from "interface";
-import {useDispatch} from "react-redux";
 import {cardsOperations} from "state/ducks/cards";
-import {AppDispatch} from "state/store";
+import {useAppDispatch} from "hooks";
 
 
 interface IProps {
@@ -20,7 +19,7 @@ function contentLength(content: string): string {
 }
 
 function Card({card, setModalCard, countComments}: IProps) {
-	const dispatch = useDispatch<AppDispatch>()
+	const dispatch = useAppDispatch()
 
 	function deleteCard(id: number) {
 		dispatch(cardsOperations.DeleteCard(id))
