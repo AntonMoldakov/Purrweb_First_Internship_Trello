@@ -34,7 +34,7 @@ function Column({cards, columns, setModalCard, comments, setIsOpen}: IProps) {
 
 	const filteredCards = useMemo(() =>
 		() =>
-			cards.filter(card => card.columnId === columns.column.id), [cards])
+			cards.filter(card => card.columnId === columns.column.id), [cards, columns.column.id])
 
 	const filteredComments = useMemo(() =>
 		(cardId: number) =>

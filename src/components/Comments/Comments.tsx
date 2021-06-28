@@ -15,7 +15,7 @@ function Comments({cardId}: IProps) {
 
 	const filteredComments = useMemo(() =>
 		() =>
-			comments.filter((comment: IComment) => comment.cardId === cardId), [cardId])
+			comments.filter((comment: IComment) => comment.cardId === cardId), [comments, cardId])
 
 	return (
 		<CommentsBlock>

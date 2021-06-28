@@ -22,7 +22,7 @@ function CardChange({cards, cardId, userName}: IProps) {
 
 	const filteredCards = useMemo(() =>
 		() =>
-			cards.filter(card => card.id === cardId), [cards])
+			cards.filter(card => card.id === cardId), [cards, cardId])
 
 	const [card] = filteredCards()
 
