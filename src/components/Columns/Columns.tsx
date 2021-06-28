@@ -5,8 +5,7 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {cardsOperations} from "state/ducks/cards";
 import {columnOperations} from "state/ducks/columns";
 import {CardChange, AddCard} from "components";
-import {AppDispatch, RootState, store} from "state/store";
-
+import {AppDispatch, RootState} from "state/store";
 
 function Columns() {
 	const dispatch = useDispatch<AppDispatch>()

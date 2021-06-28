@@ -59,8 +59,8 @@ function Column({cards, columns, setModalCard, comments, setIsOpen}: IProps) {
 			</div>
 			{
 				filteredCards().map(card => <Card key={card.id} card={card}
-				                                  countComments={filteredComments(card.id).length}
-				                                  setModalCard={setModalCard}/>)
+					                   countComments={filteredComments(card.id).length}
+					                   setModalCard={setModalCard}/>)
 			}
 			<div>
 				<AddCardButton onClick={() => setIsOpen({
